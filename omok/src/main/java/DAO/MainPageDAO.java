@@ -13,9 +13,10 @@ public class MainPageDAO {
 
     public MainPageDAO() {
         try {
-            Context ctx = new InitialContext();
-            Context envContext = (Context) ctx.lookup("java:/comp/env");
-            dataFactory = (DataSource) envContext.lookup("jdbc/mysql");
+            String dbURL = "jdbc:mysql://localhost:3306/JSP";
+            String dbID = "testuser";
+            String dbPW = "test1234";
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (Exception e) {
             e.printStackTrace();
         }
