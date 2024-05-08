@@ -1,7 +1,11 @@
+import DAO.MainPageDAO;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+
+import DAO.MainPageDAO;
 
 @WebServlet(name = "mainServlet", value = "/main")
 public class MainPageServlet extends HttpServlet {
