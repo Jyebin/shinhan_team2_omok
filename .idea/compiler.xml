@@ -9,5 +9,8 @@
         <module name="shinhan_team3_omok" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shinhan_omok" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
