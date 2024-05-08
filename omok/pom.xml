@@ -18,7 +18,7 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <!-- Servlet API Dependency -->
+    <!-- CustomGameServlet API Dependency -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>

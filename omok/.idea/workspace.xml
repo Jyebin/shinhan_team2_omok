@@ -10,9 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="410d0544-5082-4759-9697-b48414b3e044" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ex.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DAO/CustomGameDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/VO/GameListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/VO/ProfileVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/VO/UserVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Servlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Servlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CustomGameServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +26,13 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -39,7 +51,9 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2g8Cm7WyuptW7MXChh7xBW7CAMD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -161,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715069979426</updated>
       <workItem from="1715069984118" duration="3414000" />
-      <workItem from="1715137418842" duration="3201000" />
+      <workItem from="1715137418842" duration="3973000" />
     </task>
     <servers />
   </component>
