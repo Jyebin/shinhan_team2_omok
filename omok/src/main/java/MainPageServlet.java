@@ -3,7 +3,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "Servlet", value = "/Servlet")
+@WebServlet(name = "mainServlet", value = "/main")
 public class MainPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,5 +17,6 @@ public class MainPageServlet extends HttpServlet {
 
     protected void doHandle(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         // 메인 페이지 로직
+        req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
     }
 }
