@@ -6,34 +6,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body class="body">
 <main class="main">
     <section class="body-item">
         <header class="header">
             <div>랭킹</div>
-            <img src="../img/setti.png"/>
+            <img src="/img/setti.png"/>
         </header>
         <section class="body-container">
             <aside class="body-container-left">
                 <div class="medalists">
                     <div class="silver">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-silver" src="../img/silver.png" >
+                        <img class="medal-silver" src="/img/silver.png" >
                     </div>
                     <div class="gold">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-gold" src="../img/gold.png" >
+                        <img class="medal-gold" src="/img/gold.png" >
                     </div>
                     <div class="bronze">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-bronze" src="../img/bronze.png" >
+                        <img class="medal-bronze" src="/img/bronze.png" >
                     </div>
                 </div>
-                <img class="cloud" src="../img/cloud.png"/>
+                <img class="cloud" src="/img/cloud.png"/>
                 <div class="rank">
                     <div class="white-background">
                         <div class="rank-search">
@@ -83,7 +83,7 @@
             </aside>
             <section class="body-container-right">
                 <div class="fiveomoknuni-container">
-                    <img src="../img/fiveomoknuni.png">
+                    <img src="/img/fiveomoknuni.png">
                 </div>
 
                 <div class="makeroom">방생성하기</div>
