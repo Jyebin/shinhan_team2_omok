@@ -22,8 +22,7 @@
 - IntelliJ
 - GitHub
 - Discord
-- MySQL
-  (el, jstl)
+- MySQL (el, jstl)
 
 ## 구조
 
