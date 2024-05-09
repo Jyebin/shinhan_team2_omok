@@ -1,0 +1,79 @@
+.signup-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+
+/*login-item1*/
+.signup-item1{
+    
+    width: 500px;
+    height: 200px;
+    background : url("/img/cutted_background.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px 30px 30px 30px;
+}
+
+
+
+
+/*login-item2*/
+.signup-item2{
+    width: 500px;
+    height: 300px;
+    
+}
+
+.signup-item2-container{
+    margin-top: 40px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+    
+
+
+.signup-item2-container  .signup-item2-div{
+    margin-top: 10px;
+    width: 70px;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #B75D35;
+}
+
+.signup-item2-container  .signup-item2-input{
+    width: 350px;
+    height: 45px;
+    border-radius: 15px 15px 15px 15px;
+    border: 5px solid #B75D35;
+
+    font-size: large;
+}
+
+
+
+
+
+/*login-item3*/
+
+.signup-item3{
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-item3 input[type='button']{
+    margin : 40px;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #B75D35;
+    border: none;
+    font-size: 30px;
+    color: white;
+}

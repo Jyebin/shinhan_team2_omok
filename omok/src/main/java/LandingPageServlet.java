@@ -1,12 +1,12 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import DAO.MainPageDAO;
-
-@WebServlet(name = "mainServlet", value = "/main")
-public class MainPageServlet extends HttpServlet {
+@WebServlet(name = "landingServlet", value = "/landing")
+public class LandingPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,6 +22,6 @@ public class MainPageServlet extends HttpServlet {
         // 메인 페이지 로직
         // 랭킹을 위해 멤버 정보 받아오기
 
-        req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
+        req.getRequestDispatcher("/WEB-INF/view/LandingPage.jsp").forward(req, res);
     }
 }
