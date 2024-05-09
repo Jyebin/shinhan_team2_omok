@@ -1,8 +1,10 @@
 package VO;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class GameListVO {
     private Long gameId;
     private Boolean isCustom;
