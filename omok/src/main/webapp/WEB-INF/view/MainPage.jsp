@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="VO.UserVO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,20 +21,31 @@
         <section class="body-container">
             <aside class="body-container-left">
                 <div class="medalists">
-                    <div class="silver">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-silver" src="/img/silver.png" >
-                    </div>
-                    <div class="gold">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-gold" src="/img/gold.png" >
-                    </div>
-                    <div class="bronze">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-bronze" src="/img/bronze.png" >
-                    </div>
+                    <c:forEach var="list" items="${memberList}" varStatus="status">
+                        <p>${status.count}</p>
+                        <p>${list.userName}</p>
+                        <c:if test="${status.count eq 1}">
+                            <div class="gold">
+                                <div class="medal-name">${list.userName}</div>
+                                <img class="medal-gold" src="/img/gold.png" >
+                            </div>
+                        </c:if>
+                        <c:if test="${status.index eq 1}">
+                            <div class="silver">
+                                <div class="medal-name">${list.user_name}</div>
+                                <img class="medal-silver" src="/img/silver.png" >
+                            </div>
+                        </c:if>
+                        <c:if test="${status.index eq 2}">
+                            <div class="bronze">
+                                <div class="medal-name">${list.user_name}</div>
+                                <img class="medal-bronze" src="/img/bronze.png" >
+                            </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
                 <img class="cloud" src="/img/cloud.png"/>
+
                 <div class="rank">
                     <div class="white-background">
                         <div class="rank-search">
