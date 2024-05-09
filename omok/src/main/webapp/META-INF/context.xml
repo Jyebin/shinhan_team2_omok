@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/">
     <Resource
-
             name="jdbc/mysql"
             auth="Container"
             driverClassName="com.mysql.cj.jdbc.Driver"
             type="javax.sql.DataSource"
-            url="jdbc:mysql://localhost:3360/test?serverTimezone=UTC"
+            url="jdbc:mysql://localhost:3306/test"
             username="testuser"
             password="test1234"
             maxActive="20"

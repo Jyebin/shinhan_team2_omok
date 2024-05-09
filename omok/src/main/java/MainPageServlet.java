@@ -30,7 +30,7 @@ public class MainPageServlet extends HttpServlet {
         MainPageDAO dao = new MainPageDAO();
         List<UserVO> list = dao.getMemberList();
         req.setAttribute("userList", list);
-        System.out.println(list);
+        System.out.println(list.get(0).getUserName());
 //        req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
     }
 }
