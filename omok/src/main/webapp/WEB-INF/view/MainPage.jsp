@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body class="body">
 <main class="main">
@@ -22,15 +22,15 @@
                 <div class="medalists">
                     <div class="silver">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-silver" src="/img/silver.png" >
+                        <img class="medal-silver" src="/img/silver.png">
                     </div>
                     <div class="gold">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-gold" src="/img/gold.png" >
+                        <img class="medal-gold" src="/img/gold.png">
                     </div>
                     <div class="bronze">
                         <div class="medal-name">IDIDID</div>
-                        <img class="medal-bronze" src="/img/bronze.png" >
+                        <img class="medal-bronze" src="/img/bronze.png">
                     </div>
                 </div>
                 <img class="cloud" src="/img/cloud.png"/>
@@ -41,42 +41,52 @@
                         </div>
                         <div class="rank-panel">
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">4</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">4</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">5</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">5</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">6</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">6</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">7</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">7</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">8</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">8</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">9</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">9</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">10</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">10</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">11</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">11</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">12</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">12</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">13</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">13</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                             <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">14</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
+                                <div class="rank-panel-item-rank">14</div>
+                                <div class="rank-panel-item-id">IDIDIDIDID</div>
                             </div>
                         </div>
 
                     </div>
-
 
 
                 </div>
@@ -85,7 +95,9 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png">
                 </div>
-
+                <c:forEach var="i" begin="1" end="10">
+                    ${i}
+                </c:forEach>
                 <div class="makeroom">방생성하기</div>
                 <div class="speedenter">빠른 입장</div>
 
