@@ -10,6 +10,28 @@
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(function() {
+            $('#searchBtn').click(function() {
+                $.ajax({
+                    type: "get",
+                    dataType: "html",
+                    async: "false",
+                    url: "/main.do",
+                    data: {name:$('#searchName').val()},
+                    success:function(data, textStatus) {
+                        $('#rankingPage').html(data);
+                    },
+                    error:function(data, textStatus) {
+                        alert("error");
+                    },
+                    complete: function(data, textStatus) {
+                    }
+                }) // end ajax
+            }) // end click
+        }) // end function
+    </script>
 </head>
 <body class="body">
 <main class="main">
@@ -39,19 +61,19 @@
                 <div class="rank">
                     <div class="white-background">
                         <div class="rank-search">
-                            <input type="text" placeholder="아이디 검색"><input type="button" value="검색">
+                            <input type="text" id="searchName" placeholder="아이디 검색">
+                            <input type="button" id="searchBtn" value="검색">
                         </div>
-                        <div class="rank-panel">
-                            <c:forEach var="mem" items="${memberList}" varStatus="status">
+                        <div class="rank-panel" id="rankingPage">
+                            <c:forEach var="mem" items="${userList}" varStatus="status">
                                 <c:if test="${status.count >= 4}">
                                     <div class="rank-panel-item">
-                                        <div class="rank-panel-item-rank">${status.count}</div>
-                                        <div class="rank-panel-item-id">${mem}</div>
+                                        <div class="rank-panel-item-rank">${mem.value}</div>
+                                        <div class="rank-panel-item-id">${mem.key}</div>
                                     </div>
                                 </c:if>
                             </c:forEach>
                         </div>
-
                     </div>
                 </div>
             </aside>
@@ -59,9 +81,6 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png">
                 </div>
-                <c:forEach var="i" begin="1" end="10">
-                    ${i}
-                </c:forEach>
                 <div class="makeroom">방생성하기</div>
                 <div class="speedenter">빠른 입장</div>
 

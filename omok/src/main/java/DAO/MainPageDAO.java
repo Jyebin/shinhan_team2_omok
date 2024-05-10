@@ -5,8 +5,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import VO.UserVO;
 
@@ -25,23 +24,49 @@ public class MainPageDAO {
         }
     }
 
-    public List<String> getMemberList(String name) {
+    public List<String> getTopRank() {
         List<String> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         try {
             con = dataSource.getConnection();
-            String query = "select * from member";
-            if (name != null) {
-                query += " where name = ?";
-                pstmt = con.prepareStatement(query);
-                pstmt.setString(1, name);
-            } else {
-                query += " order by user_win_cnt";
-                pstmt = con.prepareStatement(query);
-            }
+
+            String query = "select user_name from user order by user_win_cnt desc limit 3";
+            pstmt = con.prepareStatement(query);
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString("user_name"));
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public Map<String, Integer> getUserList(String name) {
+        Map<String, Integer> list = new LinkedHashMap<>();
+        PreparedStatement pstmt = null;
+        try {
+            con = dataSource.getConnection();
+
+            String query = "select user_name, ranking" +
+                    " from (select user_name," +
+                    " row_number() over(order by user_win_cnt desc) as ranking from user) rk";
+            if (name != null && !"".equals(name)) {
+                query += " where user_name = ?";
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, name);
+            } else {
+                pstmt = con.prepareStatement(query);
+            }
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.put(rs.getString("user_name"), rs.getInt("ranking"));
             }
             rs.close();
             pstmt.close();
