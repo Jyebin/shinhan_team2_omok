@@ -8,4 +8,5 @@ public class ProfileVO {
     private Long proId;
     private String proName;
     private String proPic;
+    private String userId;
 }
