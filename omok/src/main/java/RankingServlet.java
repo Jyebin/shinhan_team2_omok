@@ -34,18 +34,10 @@ public class RankingServlet extends HttpServlet {
 
         PrintWriter out = res.getWriter();
         for (String names : allUserList.keySet()) {
-            if (allUserList.size() == 1) {
                 out.println("<div class=\"rank-panel-item\">");
                 out.println("<div class=\"rank-panel-item-rank\">" + allUserList.get(names) + "</div>");
                 out.println("<div class=\"rank-panel-item-id\">" + names + "</div>");
                 out.println("</div>");
-            }
-            else if (allUserList.size() > 1 && allUserList.get(names) >= 4) {
-                out.println("<div class=\"rank-panel-item\">");
-                out.println("<div class=\"rank-panel-item-rank\">" + allUserList.get(names) + "</div>");
-                out.println("<div class=\"rank-panel-item-id\">" + names + "</div>");
-                out.println("</div>");
-            }
         }
     }
 }

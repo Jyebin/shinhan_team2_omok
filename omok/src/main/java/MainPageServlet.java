@@ -40,8 +40,6 @@ public class MainPageServlet extends HttpServlet {
         req.setAttribute("secondMember", topRank.get(1));
         req.setAttribute("thirdMember", topRank.get(2));
 
-        PrintWriter out = res.getWriter();
-
         // 유저 검색
         req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
     }

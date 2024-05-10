@@ -66,12 +66,9 @@
                         </div>
                         <div class="rank-panel" id="rankingPage">
                             <c:forEach var="mem" items="${userList}" varStatus="status">
-                                <c:if test="${status.count >= 4}">
-                                    <div class="rank-panel-item">
-                                        <div class="rank-panel-item-rank">${mem.value}</div>
-                                        <div class="rank-panel-item-id">${mem.key}</div>
-                                    </div>
-                                </c:if>
+                                <div class="rank-panel-item">
+                                    <div class="rank-panel-item-rank">${mem.value}</div>
+                                    <div class="rank-panel-item-id">${mem.key}</div></div>
                             </c:forEach>
                         </div>
                     </div>
