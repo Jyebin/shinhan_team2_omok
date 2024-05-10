@@ -25,17 +25,23 @@ public class MainPageDAO {
         }
     }
 
-    public List<String> getMemberList() {
+    public List<String> getMemberList(String name) {
         List<String> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         try {
             con = dataSource.getConnection();
-            String query = "select * from member order by user_win_cnt";
-            pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery(query);
+            String query = "select * from member";
+            if (name != null) {
+                query += " where name = ?";
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, name);
+            } else {
+                query += " order by user_win_cnt";
+                pstmt = con.prepareStatement(query);
+            }
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("user_name");
-                list.add(name);
+                list.add(rs.getString("user_name"));
             }
             rs.close();
             pstmt.close();
