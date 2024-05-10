@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 public class ProfileVO {
-    private Long proId;
+    private int proId;
     private String proName;
     private String proPic;
     private String userId;
