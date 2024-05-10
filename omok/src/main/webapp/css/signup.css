@@ -48,12 +48,25 @@
 }
 
 .signup-item2-container  .signup-item2-input{
-    width: 350px;
+    width: 250px;
     height: 45px;
     border-radius: 15px 15px 15px 15px;
     border: 5px solid #B75D35;
 
     font-size: large;
+}
+
+.signup-item2-container  .signup-item2-duple{
+    position: absolute;
+    right: 550px;
+    margin-left: 15px;
+    width: 100px;
+    height: 50px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #B75D35;
+    border: none;
+    font-size: 20px;
+    color: white;
 }
 
 
