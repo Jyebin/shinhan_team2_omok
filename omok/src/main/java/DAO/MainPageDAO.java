@@ -30,7 +30,7 @@ public class MainPageDAO {
         PreparedStatement pstmt = null;
         try {
             con = dataSource.getConnection();
-            String query = "select * from member order by user_id";
+            String query = "select * from user order by user_id";
             pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery(query);
             while (rs.next()) {
