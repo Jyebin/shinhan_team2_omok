@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="VO.UserVO"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body class="body">
 <main class="main">
@@ -59,7 +59,9 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png">
                 </div>
-
+                <c:forEach var="i" begin="1" end="10">
+                    ${i}
+                </c:forEach>
                 <div class="makeroom">방생성하기</div>
                 <div class="speedenter">빠른 입장</div>
 
