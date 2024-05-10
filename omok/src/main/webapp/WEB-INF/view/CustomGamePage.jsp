@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +44,9 @@
                     </div>
                     <div class="codeBox">
                         <div class="codeBox-title">참여자 대기중</div>
-                        <div class="codeBox-code">adfa5sdf</div>
+                        <div class="codeBox-code">
+                            ${roomCode}
+                        </div>
                         <div class="codeBox-buttons">
                             <input type="button" class="codeBox-buttons-copy" value="코드복사"/>
                             <input type="button" class="codeBox-buttons-convert" value="공개방 전환"/>

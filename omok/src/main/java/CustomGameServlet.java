@@ -10,6 +10,7 @@ public class CustomGameServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StringBuilder roomCode = createRandomText();
         System.out.println(roomCode);
+        request.setAttribute("roomCode",roomCode);
         doHandle(request, response);
     }
 
