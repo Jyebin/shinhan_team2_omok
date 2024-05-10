@@ -37,10 +37,18 @@
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">IDIDID</div>
                     </div>
-                    <div class="opponent">
+                    <div class="opponent opponent2">
                         <img class="opponents-dot" src="/img/whitedot.png" />
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id">IDIDID</div>
+                    </div>
+                    <div class="codeBox">
+                        <div class="codeBox-title">참여자 대기중</div>
+                        <div class="codeBox-code">adfa5sdf</div>
+                        <div class="codeBox-buttons">
+                            <input type="button" class="codeBox-buttons-copy" value="코드복사"/>
+                            <input type="button" class="codeBox-buttons-convert" value="공개방 전환"/>
+                        </div>
                     </div>
                 </div>
 
