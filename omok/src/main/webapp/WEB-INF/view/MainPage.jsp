@@ -22,11 +22,11 @@
             <aside class="body-container-left">
                 <div class="medalists">
                     <div class="silver">
-                        <div class="medal-name">${firstMember}</div>
+                        <div class="medal-name">${secondMember}</div>
                         <img class="medal-silver" src="/img/silver.png" >
                     </div>
                     <div class="gold">
-                        <div class="medal-name">${secondMember}</div>
+                        <div class="medal-name">${firstMember}</div>
                         <img class="medal-gold" src="${pageContext.request.contextPath}/img/gold.png" >
                     </div>
                     <div class="bronze">
@@ -42,45 +42,17 @@
                             <input type="text" placeholder="아이디 검색"><input type="button" value="검색">
                         </div>
                         <div class="rank-panel">
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">4</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">5</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">6</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">7</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">8</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">9</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">10</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">11</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">12</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">13</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">14</div> <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
+                            <c:forEach var="mem" items="${memberList}" varStatus="status">
+                                <c:if test="${status.count >= 4}">
+                                    <div class="rank-panel-item">
+                                        <div class="rank-panel-item-rank">${status.count}</div>
+                                        <div class="rank-panel-item-id">${mem.userName}</div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
 
                     </div>
-
-
-
                 </div>
             </aside>
             <section class="body-container-right">
