@@ -46,7 +46,7 @@
                                 <c:if test="${status.count >= 4}">
                                     <div class="rank-panel-item">
                                         <div class="rank-panel-item-rank">${status.count}</div>
-                                        <div class="rank-panel-item-id">${mem.userName}</div>
+                                        <div class="rank-panel-item-id">${mem}</div>
                                     </div>
                                 </c:if>
                             </c:forEach>

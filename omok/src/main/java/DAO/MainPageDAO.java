@@ -25,37 +25,29 @@ public class MainPageDAO {
         }
     }
 
-    public List<UserVO> getMemberList() {
-        List<UserVO> list = new ArrayList<>();
+    public List<String> getMemberList(String name) {
+        List<String> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         try {
             con = dataSource.getConnection();
-            String query = "select * from user order by user_id";
-            pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery(query);
+            String query = "select * from member";
+            if (name != null) {
+                query += " where name = ?";
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, name);
+            } else {
+                query += " order by user_win_cnt";
+                pstmt = con.prepareStatement(query);
+            }
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                // 한 행(회원 1명당) 처리
-                int id = rs.getInt("user_id");
-                String pw = rs.getString("user_pw");
-                String name = rs.getString("user_name");
-                int userWinCnt = rs.getInt("user_win_cnt");
-                int userGameCnt = rs.getInt("user_win_cnt");
-
-                UserVO vo = new UserVO();
-                vo.setUserId(id);
-                vo.setUserPw(pw);
-                vo.setUserName(name);
-                vo.setUserWinCnt(userWinCnt);
-                vo.setUserGameCnt(userGameCnt);
-                list.add(vo);
+                list.add(rs.getString("user_name"));
             }
             rs.close();
             pstmt.close();
             con.close();
-            System.out.println("read success");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("read fail");
         }
         return list;
     }

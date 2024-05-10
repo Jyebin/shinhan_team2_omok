@@ -24,17 +24,19 @@ public class MainPageServlet extends HttpServlet {
     protected void doHandle(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.setContentType("text/html; charset=utf-8");
         // 메인 페이지 로직
+
         // 랭킹을 위해 멤버 정보 받아오기
         MainPageDAO dao = new MainPageDAO();
-        List<UserVO> list = dao.getMemberList();
-        req.setAttribute("memberList", list);
-        for (int i = 0; i < list.size(); i++){
-            System.out.println(i + " " + list.get(i).getUserName());
+        List<String> allMemberList = dao.getMemberList(null);
+        req.setAttribute("memberList", allMemberList);
+        for (int i = 0; i < allMemberList.size(); i++){
+            System.out.println(i + " " + allMemberList.get(i));
         }
         // 1~3등은 따로 정보 넘겨주기
-        req.setAttribute("firstMember", list.get(0).getUserName());
-        req.setAttribute("secondMember", list.get(1).getUserName());
-        req.setAttribute("thirdMember", list.get(2).getUserName());
+        req.setAttribute("firstMember", allMemberList.get(0));
+        req.setAttribute("secondMember", allMemberList.get(1));
+        req.setAttribute("thirdMember", allMemberList.get(2));
+        // 유저 검색
         req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
     }
 }
