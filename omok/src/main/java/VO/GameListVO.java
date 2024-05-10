@@ -9,5 +9,5 @@ public class GameListVO {
     private int gameId;
     private Boolean isCustom;
     private String gameCode;
-    private String userId;
+    private int userId;
 }
