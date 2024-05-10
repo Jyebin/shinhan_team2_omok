@@ -31,6 +31,10 @@ public class MainPageServlet extends HttpServlet {
         for (int i = 0; i < list.size(); i++){
             System.out.println(i + " " + list.get(i).getUserName());
         }
+        // 1~3등은 따로 정보 넘겨주기
+        req.setAttribute("firstMember", list.get(0).getUserName());
+        req.setAttribute("secondMember", list.get(1).getUserName());
+        req.setAttribute("thirdMember", list.get(2).getUserName());
         req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
     }
 }
