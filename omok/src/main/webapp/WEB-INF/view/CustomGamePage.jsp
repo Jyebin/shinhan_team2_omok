@@ -15,9 +15,10 @@
     <script src="/clock.js"></script>
     <script>
         function copy(){
-            var roomCode = document.getElementById('roomCode'); //id가 roomCode인 값을 가져와 roomCode에 대입
+            var roomCode = document.getElementById('roomCode2'); //id가 roomCode인 값을 가져와 roomCode에 대입
             var range = document.createRange(); //복사할 텍스트의 범위 지정
             range.selectNode(roomCode); //roomCode 요소의 내용 선택
+            //window.getSelection().removeAllRanges(); //범위 제거
             window.getSelection().addRange(range); //위에서 만든 range를 현재 선택에 추가
             document.execCommand('copy'); //클립보드에 복사
             alert('방 코드가 복사되었습니다.');
@@ -55,7 +56,7 @@
                     <div class="codeBox">
                         <div class="codeBox-title">참여자 대기중</div>
                         <div class="codeBox-code" id="roomCode">
-                            ${roomCode}
+                            <p id="roomCode2">${roomCode}</p>
                         </div>
                         <div class="codeBox-buttons">
                             <input type="button" onclick="copy()" class="codeBox-buttons-copy" value="코드복사"/>
