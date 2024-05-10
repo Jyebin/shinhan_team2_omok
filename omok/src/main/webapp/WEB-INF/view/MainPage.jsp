@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="VO.UserVO"%>
 <!DOCTYPE html>
@@ -21,28 +21,18 @@
         <section class="body-container">
             <aside class="body-container-left">
                 <div class="medalists">
-                    <c:forEach var="list" items="${memberList}" varStatus="status">
-                        <p>${status.count}</p>
-                        <p>${list.userName}</p>
-                        <c:if test="${status.count eq 1}">
-                            <div class="gold">
-                                <div class="medal-name">${list.userName}</div>
-                                <img class="medal-gold" src="/img/gold.png" >
-                            </div>
-                        </c:if>
-                        <c:if test="${status.index eq 1}">
-                            <div class="silver">
-                                <div class="medal-name">${list.user_name}</div>
-                                <img class="medal-silver" src="/img/silver.png" >
-                            </div>
-                        </c:if>
-                        <c:if test="${status.index eq 2}">
-                            <div class="bronze">
-                                <div class="medal-name">${list.user_name}</div>
-                                <img class="medal-bronze" src="/img/bronze.png" >
-                            </div>
-                        </c:if>
-                    </c:forEach>
+                    <div class="silver">
+                        <div class="medal-name">${firstMember}</div>
+                        <img class="medal-silver" src="/img/silver.png" >
+                    </div>
+                    <div class="gold">
+                        <div class="medal-name">${secondMember}</div>
+                        <img class="medal-gold" src="${pageContext.request.contextPath}/img/gold.png" >
+                    </div>
+                    <div class="bronze">
+                        <div class="medal-name">${thirdMember}</div>
+                        <img class="medal-bronze" src="/img/bronze.png" >
+                    </div>
                 </div>
                 <img class="cloud" src="/img/cloud.png"/>
 
