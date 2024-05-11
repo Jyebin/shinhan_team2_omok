@@ -25,15 +25,18 @@
         }
 
         function change() {
+            const roomCode = document.getElementById('roomCode2').innerText;
             const xml = new XMLHttpRequest(); //XMLHttpRequest 객체 생성(서버 통신을 위함)
-            xml.open('POST', '/custom-game');
+            xml.open('POST', '/custom-game'); //서버로 요청을 보냄
+            xml.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            const requestBody = "roomCode="+encodeURIComponent(roomCode); //요청 본문에 roomCode 값 추가
             xml.onreadystatechange = function () { //서버로부터 응답이 도착할 때마다 호출
                 if (xml.readyState === XMLHttpRequest.DONE) { //서버와의 통신이 완료되면
                     alert('공개 방으로 전환합니다.');
                     window.location.href = '/random';
                 }
             };
-            xml.send();
+            xml.send(requestBody);
         }
 
     </script>
