@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,74 +22,37 @@
             <aside class="body-container-left">
                 <div class="medalists">
                     <div class="silver">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-silver" src="/img/silver.png">
+                        <div class="medal-name">${secondMember}</div>
+                        <img class="medal-silver" src="/img/silver.png" >
                     </div>
                     <div class="gold">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-gold" src="/img/gold.png">
+                        <div class="medal-name">${firstMember}</div>
+                        <img class="medal-gold" src="${pageContext.request.contextPath}/img/gold.png" >
                     </div>
                     <div class="bronze">
-                        <div class="medal-name">IDIDID</div>
-                        <img class="medal-bronze" src="/img/bronze.png">
+                        <div class="medal-name">${thirdMember}</div>
+                        <img class="medal-bronze" src="/img/bronze.png" >
                     </div>
                 </div>
                 <img class="cloud" src="/img/cloud.png"/>
+
                 <div class="rank">
                     <div class="white-background">
                         <div class="rank-search">
                             <input type="text" placeholder="아이디 검색"><input type="button" value="검색">
                         </div>
                         <div class="rank-panel">
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">4</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">5</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">6</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">7</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">8</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">9</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">10</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">11</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">12</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">13</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
-                            <div class="rank-panel-item">
-                                <div class="rank-panel-item-rank">14</div>
-                                <div class="rank-panel-item-id">IDIDIDIDID</div>
-                            </div>
+                            <c:forEach var="mem" items="${memberList}" varStatus="status">
+                                <c:if test="${status.count >= 4}">
+                                    <div class="rank-panel-item">
+                                        <div class="rank-panel-item-rank">${status.count}</div>
+                                        <div class="rank-panel-item-id">${mem.userName}</div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
 
                     </div>
-
-
                 </div>
             </aside>
             <section class="body-container-right">
