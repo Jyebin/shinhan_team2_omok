@@ -10,12 +10,13 @@
 <%--폰트--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/common.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <link rel="stylesheet" href="/css/modal.css"/>
+    <link rel="stylesheet" href="/css/modal.css?after"/>
+    <link rel="stylesheet" href="/css/common.css?after"/>
+    <link rel="stylesheet" href="/css/main.css?after"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(function() {
@@ -76,7 +77,7 @@
                     <div class="white-background">
                         <div class="rank-search">
                             <input type="text" id="searchName" placeholder="아이디 검색">
-                            <input type="button" id="searchBtn" value="검색">
+                            <input type="button" id="searchBtn" value="🔍">
                         </div>
                         <div class="rank-panel" id="rankingPage">
                             <c:forEach var="mem" items="${userList}" varStatus="status">
@@ -92,12 +93,12 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png">
                 </div>
-                <div class="makeroom">방생성하기</div>
-                <div class="speedenter">빠른 입장</div>
+                <div class="makeRoom">방 생성하기</div>
+                <div class="speedEnter">빠른 입장</div>
 
-                <div class="codeenter">
+                <div class="codeEnter">
                     <input class="code" type="text" placeholder="코드 입력하기"/>
-                    <input class="codebutton" type="button" value="코드 입장">
+                    <input class="codeButton" type="button" value="코드 입장">
                 </div>
             </section>
         </section>
