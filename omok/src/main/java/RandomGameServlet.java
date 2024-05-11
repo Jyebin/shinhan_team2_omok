@@ -19,9 +19,9 @@ public class RandomGameServlet extends HttpServlet {
     }
 
     protected void doHandle(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 메인 페이지 로직
-        // 랭킹을 위해 멤버 정보 받아오기
+        res.setContentType("text/html; charset=utf-8");
 
         req.getRequestDispatcher("/WEB-INF/view/RandomGamePage.jsp").forward(req, res);
+
     }
 }
