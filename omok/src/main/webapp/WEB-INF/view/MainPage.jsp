@@ -7,9 +7,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
+<%--폰트--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/modal.css"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(function() {
@@ -30,6 +36,14 @@
                     }
                 }) // end ajax
             }) // end click
+            $('#setBtn').click(function() {
+                $('.setting-bg').show();
+                $('.setting').show();
+            })
+            $('#exitBtn').click(function() {
+                $('.setting-bg').hide();
+                $('.setting').hide();
+            })
         }) // end function
     </script>
 </head>
@@ -38,7 +52,7 @@
     <section class="body-item">
         <header class="header">
             <div>랭킹</div>
-            <img src="/img/setti.png"/>
+            <img src="/img/setti.png" id="setBtn"/>
         </header>
         <section class="body-container">
             <aside class="body-container-left">
@@ -89,6 +103,15 @@
         </section>
 
     </section>
+    <div class="setting-bg"></div>
+    <div class="setting">
+        <div class="setting-header">
+            <input id="exitBtn" type="button" value="X">
+        </div>
+        <input id="logout" type="button" value="로그아웃">
+        <input id="pwd" type="password" placeholder="pwd 입력">
+        <input id="withdraw" type="button" value="회원탈퇴">
+    </div>
 </main>
 </body>
 </html>
