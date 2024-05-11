@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +13,17 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
+    <script>
+        function copy(){
+            var roomCode = document.getElementById('roomCode2'); //id가 roomCode인 값을 가져와 roomCode에 대입
+            var range = document.createRange(); //복사할 텍스트의 범위 지정
+            range.selectNode(roomCode); //roomCode 요소의 내용 선택
+            //window.getSelection().removeAllRanges(); //범위 제거
+            window.getSelection().addRange(range); //위에서 만든 range를 현재 선택에 추가
+            document.execCommand('copy'); //클립보드에 복사
+            alert('방 코드가 복사되었습니다.');
+        }
+    </script>
 </head>
 
 <body class="body">
@@ -37,10 +48,20 @@
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">IDIDID</div>
                     </div>
-                    <div class="opponent">
+                    <div class="opponent opponent2">
                         <img class="opponents-dot" src="/img/whitedot.png" />
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id">IDIDID</div>
+                    </div>
+                    <div class="codeBox">
+                        <div class="codeBox-title">참여자 대기중</div>
+                        <div class="codeBox-code" id="roomCode">
+                            <p id="roomCode2">${roomCode}</p>
+                        </div>
+                        <div class="codeBox-buttons">
+                            <input type="button" onclick="copy()" class="codeBox-buttons-copy" value="코드복사"/>
+                            <input type="button" class="codeBox-buttons-convert" value="공개방 전환"/>
+                        </div>
                     </div>
                 </div>
 
