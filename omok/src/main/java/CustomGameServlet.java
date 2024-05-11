@@ -24,8 +24,14 @@ public class CustomGameServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        doHandle(request, response);
+        String roomCode = request.getParameter("roomCode"); //roomCode값을 받아옴
+        if(roomCode!=null){
+            System.out.println("roomCode:"+roomCode);
+            CustomGameDAO customGameDAO = new CustomGameDAO();
+            customGameDAO.changeIsCustom(roomCode);
+        }else{
+            System.out.println("roomCode가 null값입니다");
+        }
     }
 
     protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
