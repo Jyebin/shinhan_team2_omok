@@ -1,16 +1,24 @@
+import DAO.CustomGameDAO;
+
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.security.SecureRandom;
 
+
 @WebServlet(name = "CustomGameServlet", value = "/custom-game")
 public class CustomGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StringBuilder roomCode = createRandomText();
+        StringBuilder roomCode = createRandomText(); //roomCode 생성
         System.out.println(roomCode);
-        request.setAttribute("roomCode",roomCode);
+
+        CustomGameDAO customGameDAO = new CustomGameDAO();
+        customGameDAO.createGame(roomCode.toString()); //저장
+
+        request.setAttribute("roomCode", roomCode); //프로트로 전송
         doHandle(request, response);
     }
 
@@ -20,11 +28,10 @@ public class CustomGameServlet extends HttpServlet {
         doHandle(request, response);
     }
 
-    protected void doHandle(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 메인 페이지 로직
         // 랭킹을 위해 멤버 정보 받아오기
-
-        req.getRequestDispatcher("/WEB-INF/view/CustomGamePage.jsp").forward(req, res);
+        request.getRequestDispatcher("/WEB-INF/view/CustomGamePage.jsp").forward(request, response);
     }
 
     public static StringBuilder createRandomText() { //방 입장 코드 생성 로직
@@ -37,4 +44,5 @@ public class CustomGameServlet extends HttpServlet {
         }
         return roomCode;
     }
+
 }
