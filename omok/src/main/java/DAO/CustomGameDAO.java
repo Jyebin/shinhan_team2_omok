@@ -43,7 +43,7 @@ public class CustomGameDAO {
 
     public void changeIsCustom(String roomCode){ //현재 방의 roomCode를 기반으로 그 방의 is_custom 값 변경
         try{
-            String query = "update gamelist set is_custom=? where game_code=?";
+            String query = "update gamelist set is_custom=? where game_code=? and is_custom=true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1,false);
             preparedStatement.setString(2,roomCode);

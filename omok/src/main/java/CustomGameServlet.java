@@ -18,7 +18,7 @@ public class CustomGameServlet extends HttpServlet {
         CustomGameDAO customGameDAO = new CustomGameDAO();
         customGameDAO.createGame(roomCode.toString()); //저장
 
-        request.setAttribute("roomCode", roomCode); //프로트로 전송
+        request.setAttribute("roomCode", roomCode); //프론트로 전송
         doHandle(request, response);
     }
 
