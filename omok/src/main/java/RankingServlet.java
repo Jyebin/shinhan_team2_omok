@@ -1,17 +1,17 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import DAO.MainPageDAO;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import DAO.MainPageDAO;
-
-import VO.UserVO;
-
-@WebServlet(name = "mainServlet", value = "/main")
-public class MainPageServlet extends HttpServlet {
+@WebServlet(name = "rankingServlet", value = "/main.do")
+public class RankingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,18 +29,15 @@ public class MainPageServlet extends HttpServlet {
 
         // 랭킹을 위해 멤버 정보 받아오기
         MainPageDAO dao = new MainPageDAO();
-        // 상위 3명 정보 불러오기
-        List<String> topRank = dao.getTopRank();
-        // 전체 멤버 정보 or 검색 멤버 정보 불러오기
-        String name = req.getParameter(null);
+        String name = req.getParameter("name");
         Map<String, Integer> allUserList = dao.getUserList(name);
-        // attribute 설정
-        req.setAttribute("userList", allUserList);
-        req.setAttribute("firstMember", topRank.get(0));
-        req.setAttribute("secondMember", topRank.get(1));
-        req.setAttribute("thirdMember", topRank.get(2));
 
-        // 유저 검색
-        req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
+        PrintWriter out = res.getWriter();
+        for (String names : allUserList.keySet()) {
+                out.println("<div class=\"rank-panel-item\">");
+                out.println("<div class=\"rank-panel-item-rank\">" + allUserList.get(names) + "</div>");
+                out.println("<div class=\"rank-panel-item-id\">" + names + "</div>");
+                out.println("</div>");
+        }
     }
 }
