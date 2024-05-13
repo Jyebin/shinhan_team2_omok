@@ -4,6 +4,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class CustomGameDAO {
@@ -55,15 +56,23 @@ public class CustomGameDAO {
         }
     }
 
-    public void findRoomId(String roomCode){
+    public StringBuilder findRoomId(String roomCode){
+        StringBuilder gameId = new StringBuilder();
         try{
             String query = "select game_id from gamelist where game_code=? and is_custom=true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,roomCode);
-            System.out.println("방 id 찾기 성공");
-        }catch(Exception e){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                gameId.append(resultSet.getString("game_id"));
+                System.out.println("방 id 찾기 성공");
+            }else{
+                System.out.println("일치하는 방이 없습니다.");
+            }
+        }catch(Exception e) {
             e.printStackTrace();
             System.out.println("방 id 찾기 실패");
         }
+        return gameId;
     }
 }
