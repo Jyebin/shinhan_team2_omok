@@ -57,7 +57,7 @@ public class CustomGameDAO {
 
     public void findRoomId(String roomCode){
         try{
-            String query = "select room_id from gamelist where game_code=? and is_custom=true";
+            String query = "select game_id from gamelist where game_code=? and is_custom=true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,roomCode);
             System.out.println("방 id 찾기 성공");
