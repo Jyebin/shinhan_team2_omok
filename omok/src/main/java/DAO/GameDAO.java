@@ -29,7 +29,7 @@ public class GameDAO {
 
     public void createGame(boolean isCustom, String roomCode) { //게임 방 생성
         try {
-            String query = "insert into GameList (is_custom, game_code, can_ebter) values(?,?,true)";
+            String query = "insert into GameList (is_custom, game_code, can_enter) values(?,?,true)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1,isCustom);
             preparedStatement.setString(2,roomCode);
@@ -73,7 +73,8 @@ public class GameDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                gameId.append(resultSet.getString("game_id"));
+                String temp = String.valueOf(resultSet.getInt("last_insert_id()"));
+                gameId.append(temp);
                 System.out.println("방 id 찾기 성공");
             }else{
                 System.out.println("일치하는 방이 없습니다.");

@@ -26,8 +26,9 @@ public class CreateRoomServlet extends HttpServlet {
         String redirectURL = "";
         GameDAO gameDAO = new GameDAO();
 
-        String roomType = req.getParameter("name"); // random / custom 구분
-        if ("random".equals(roomType)) { // random이면 url만 변경
+        String roomType = req.getParameter("type"); // random / custom 구분
+        System.out.println(roomType + "!!!");
+        if ("공개".equals(roomType)) { // random이면 url만 변경
             redirectURL += "/random-game?";
         } else { // custom이면 url, 나머지 db 변수 모두 변경
             redirectURL += "/custom-game?";
@@ -38,6 +39,7 @@ public class CreateRoomServlet extends HttpServlet {
         // 방 생성 및 번호 받아오기
         gameDAO.createGame(isCustom, roomCode);
         room = gameDAO.findRoomId().toString();
+
 
         req.setAttribute("room",room);
         req.setAttribute("type", "create");
