@@ -105,13 +105,16 @@
                 <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
 
                 <form action="${pageContext.request.contextPath}/enterRoom" method="get">
-                    <input type="submit" class="speedEnter" id="speedEnter" value="빠른 입장">
+                    <input type="submit" class="speedEnter" id="speedEnter" value="빠른 입장" name="roomType">
                 </form>
 
-                <div class="codeEnter">
-                    <input class="code" type="text" placeholder="코드 입력하기"/>
-                    <input class="codeButton" type="button" value="코드 입장">
-                </div>
+                <form action="${pageContext.request.contextPath}/enterRoom" method="get">
+                    <div class="codeEnter">
+                        <input class="code" type="text" placeholder="코드 입력하기" name="code"/>
+                        <input class="codeButton" type="submit" value="코드 입장" name="roomType">
+                    </div>
+                </form>
+
             </section>
         </section>
 

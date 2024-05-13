@@ -16,13 +16,12 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
-        var type="enter";
-        var room="<% request.getAttribute("room");%>";
-        var color="black";
+        var type="<%=request.getAttribute("room") %>";
+        var room="<%=request.getAttribute("room")%>";
 
         console.log(room);
 
-        var webSocket = new WebSocket("ws:/localhost:9090/room="+room+"/color="+color);
+        var webSocket = new WebSocket("ws:/localhost:9090/room="+room+"/type="+type);
     </script>
     <script>
         // 바둑알 놓기
@@ -79,16 +78,7 @@
                 // 바둑판에 요소 추가해서 돌 놓기
                 go.appendChild(blackStone);
 
-               // 소켓으로 x, y 좌표 보내주기
-                const eventData = {
-                    event : "place_stone",
-                    row: returnX,
-                    col: returnY,
-                    color: "black"
-                };
-
-                const eventDataStr = JSON.stringify(eventData);
-                socket.send(eventDataStr);
+                // 소켓으로 x, y 좌표 보내주기
             });
         });
 
