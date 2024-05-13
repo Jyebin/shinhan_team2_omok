@@ -1,43 +1,40 @@
 package WebSocket;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-// WebSocket의 호스트 주소 설정
 @ServerEndpoint("/websocket")
 public class WebSocket {
-    // WebSocket으로 브라우저가 접속하면 요청되는 함수
+    private static final List<Session> sessionList = new ArrayList<>();
+
     @OnOpen
-    public void handleOpen(){
-        //콘솔에 접속 로그 출력
+    public void handleOpen(Session session) {
+        sessionList.add(session);
         System.out.println("연결되었습니다.");
     }
 
-    //WebSocket으로 메세지가 오면 요청되는 함수
     @OnMessage
-    public String handleMessage(String message){
-        //콘솔에 메세지 내용 출력
+    public void handleMessage(String message, Session session) throws IOException {
         System.out.println("메세지 : " + message);
 
-        String replyMessage = "응답 : " + message;
-        //응답 메세지 콘솔에 출력
-        System.out.println("응답 메세지 : " + replyMessage);
-
-        return replyMessage;
+        // 받은 좌표를 모든 클라이언트에게 전송
+        for (Session s : sessionList) {
+            if (!s.equals(session)) {
+                s.getBasicRemote().sendText(message);
+            }
+        }
     }
 
-    //연결이 끊겼을 경우
     @OnClose
-    public void handleClose(){
+    public void handleClose() {
         System.out.println("연결 끊김");
     }
 
-    //통신 에러가 발생한 경우
     @OnError
-    public void handleError(Throwable t){
+    public void handleError(Throwable t) {
         t.printStackTrace();
     }
 }
