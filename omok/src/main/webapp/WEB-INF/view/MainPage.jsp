@@ -130,8 +130,8 @@
             <input id="selectExitBtn" type="button" value="X">
         </div>
         <form class="formClass" action="${pageContext.request.contextPath}/createRoom" method="get">
-            <input id="public" name="public" type="submit" value="공개">
-            <input id="private" name="private" type="submit" value="비공개">
+            <input id="public" name="type" type="submit" value="공개">
+            <input id="private" name="type" type="submit" value="비공개">
         </form>
 
     </div>
