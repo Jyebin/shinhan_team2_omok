@@ -31,45 +31,45 @@ public class CustomGameDAO {
         try {
             String query = "insert into GameList (is_custom, game_code) values(?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBoolean(1,true);
-            preparedStatement.setString(2,roomCode);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setString(2, roomCode);
             preparedStatement.executeUpdate();
             System.out.println("방 생성 성공");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("방 생성 실패");
         }
     }
 
 
-    public void changeIsCustom(String roomCode){ //현재 방의 roomCode를 기반으로 그 방의 is_custom 값 변경
-        try{
+    public void changeIsCustom(String roomCode) { //현재 방의 roomCode를 기반으로 그 방의 is_custom 값 변경
+        try {
             String query = "update gamelist set is_custom=? where game_code=? and is_custom=true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBoolean(1,false);
-            preparedStatement.setString(2,roomCode);
+            preparedStatement.setBoolean(1, false);
+            preparedStatement.setString(2, roomCode);
             preparedStatement.executeUpdate();
             System.out.println("방 전환 성공");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("방 전환 실패");
         }
     }
 
-    public StringBuilder findRoomId(String roomCode){
+    public StringBuilder findRoomId(String roomCode) { //게임 입장 코드로 방 id를 찾아 매개변수 값으로 전송
         StringBuilder gameId = new StringBuilder();
-        try{
-            String query = "select game_id from gamelist where game_code=? and is_custom=true";
+        try {
+            String query = "select game_id from gamelist where game_code=? and is_custom = true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,roomCode);
+            preparedStatement.setString(1, roomCode);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 gameId.append(resultSet.getString("game_id"));
                 System.out.println("방 id 찾기 성공");
-            }else{
+            } else {
                 System.out.println("일치하는 방이 없습니다.");
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("방 id 찾기 실패");
         }
