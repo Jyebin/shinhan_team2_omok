@@ -39,14 +39,23 @@
             }) // end click
             $('#setBtn').click(function() {
                 $('.setting-bg').show();
-                $('.setting').show();
+                $('#set').show();
             })
             $('#exitBtn').click(function() {
                 $('.setting-bg').hide();
-                $('.setting').hide();
+                $('#set').hide();
+            })
+            $('#makeRoom').click(function() {
+                $('.setting-bg').show();
+                $('#select').show();
+            })
+            $('#selectExitBtn').click(function() {
+                $('.setting-bg').hide();
+                $('#select').hide();
             })
         }) // end function
     </script>
+
 </head>
 <body class="body">
 <main class="main">
@@ -93,7 +102,7 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png">
                 </div>
-                <div class="makeRoom">방 생성하기</div>
+                <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
                 <div class="speedEnter">빠른 입장</div>
 
                 <div class="codeEnter">
@@ -105,13 +114,23 @@
 
     </section>
     <div class="setting-bg"></div>
-    <div class="setting">
+    <div class="setting" id="set">
         <div class="setting-header">
             <input id="exitBtn" type="button" value="X">
         </div>
         <input id="logout" type="button" value="로그아웃">
         <input id="pwd" type="password" placeholder="pwd 입력">
         <input id="withdraw" type="button" value="회원탈퇴">
+    </div>
+    <div class="setting" id="select">
+        <div class="setting-header">
+            <input id="selectExitBtn" type="button" value="X">
+        </div>
+        <form class="formClass" action="${pageContext.request.contextPath}/createRoom" method="get">
+            <input id="public" name="public" type="submit" value="공개">
+            <input id="private" name="private" type="submit" value="비공개">
+        </form>
+
     </div>
 </main>
 </body>
