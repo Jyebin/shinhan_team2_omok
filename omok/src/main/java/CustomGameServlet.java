@@ -11,7 +11,7 @@ import java.security.SecureRandom;
 public class CustomGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doHandle(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/CustomGamePage.jsp").forward(request, response);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class CustomGameServlet extends HttpServlet {
     }
 
     protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/CustomGamePage.jsp").forward(request, response);
+
     }
 }

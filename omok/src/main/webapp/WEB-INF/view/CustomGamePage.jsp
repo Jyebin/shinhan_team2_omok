@@ -14,6 +14,14 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
+        var type="<%=request.getAttribute("type") %>";
+        var room="<%=request.getAttribute("room")%>";
+
+        console.log(room);
+
+        var webSocket = new WebSocket("ws:/localhost:9090/room="+room+"/type="+type);
+    </script>
+    <script>
         function copy() {
             var roomCode = document.getElementById('roomCode2'); //id가 roomCode인 값을 가져와 roomCode에 대입
             var range = document.createRange(); //복사할 텍스트의 범위 지정
@@ -61,7 +69,7 @@
                     <div class="opponent">
                         <img class="opponents-dot" src="/img/blackdot.png"/>
                         <img class="opponents-img" src="/img/right_character.png">
-                        <div class="opponents-id"><img class="me" src="/img/mestar.png">IDIDID</div>
+                        <div class="opponents-id"><img class="me" src="/img/mestar.png">${user.userName}</div>
                     </div>
                     <div class="opponent opponent2">
                         <img class="opponents-dot" src="/img/whitedot.png"/>

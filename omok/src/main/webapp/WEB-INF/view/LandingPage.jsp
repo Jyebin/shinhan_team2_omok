@@ -7,7 +7,7 @@
     <title>오목눈이</title>
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/index.css?after" />
     <script src="/js/index.js"></script>
 </head>
 <body class="body">

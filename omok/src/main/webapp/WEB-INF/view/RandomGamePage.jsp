@@ -16,7 +16,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
-        var type="<%=request.getAttribute("room") %>";
+        var type="<%=request.getAttribute("type") %>";
         var room="<%=request.getAttribute("room")%>";
 
         console.log(room);

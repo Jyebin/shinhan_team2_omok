@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
@@ -27,7 +29,6 @@ public class CreateRoomServlet extends HttpServlet {
         GameDAO gameDAO = new GameDAO();
 
         String roomType = req.getParameter("type"); // random / custom 구분
-        System.out.println(roomType + "!!!");
         if ("공개".equals(roomType)) { // random이면 url만 변경
             redirectURL += "/random-game?";
         } else { // custom이면 url, 나머지 db 변수 모두 변경
@@ -43,6 +44,10 @@ public class CreateRoomServlet extends HttpServlet {
 
         req.setAttribute("room",room);
         req.setAttribute("type", "create");
+
+        // 세션에 정보 저장
+        HttpSession session = req.getSession();
+        session.setAttribute("roomCode", roomCode);
 
         redirectURL += "room="+room+"&type="+type;
         res.sendRedirect(redirectURL);

@@ -9,7 +9,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/{room}/{color}")
+@ServerEndpoint("/{room}/{type}")
 public class WebSocket {
     // 대기 방, 꽉찬 방 리스트
     Map<String, List<Session>> waitingRoom = new LinkedHashMap<>();
@@ -18,7 +18,7 @@ public class WebSocket {
     // WebSocket으로 브라우저가 접속하면 요청되는 함수
     // type -> create, enter로 나뉨 ,, 로직 다시 짜야됨
     @OnOpen
-    public void handleOpen(Session sess, @PathParam("type") String type, @PathParam("room") String room, @PathParam("color") String color) throws IOException {
+    public void handleOpen(Session sess, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
         System.out.println("socket loading");
         if ("create".equals(type)) {
             // 방 생성 로직
