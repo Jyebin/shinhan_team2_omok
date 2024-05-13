@@ -54,4 +54,16 @@ public class CustomGameDAO {
             System.out.println("방 전환 실패");
         }
     }
+
+    public void findRoomId(String roomCode){
+        try{
+            String query = "select room_id from gamelist where game_code=? and is_custom=true";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,roomCode);
+            System.out.println("방 id 찾기 성공");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("방 id 찾기 실패");
+        }
+    }
 }
