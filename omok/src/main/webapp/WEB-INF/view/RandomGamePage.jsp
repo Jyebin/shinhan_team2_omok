@@ -80,6 +80,15 @@
                 go.appendChild(blackStone);
 
                // 소켓으로 x, y 좌표 보내주기
+                const eventData = {
+                    event : "place_stone",
+                    row: returnX,
+                    col: returnY,
+                    color: "black"
+                };
+
+                const eventDataStr = JSON.stringify(eventData);
+                socket.send(eventDataStr);
             });
         });
 
