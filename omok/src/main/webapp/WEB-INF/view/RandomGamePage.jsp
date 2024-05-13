@@ -11,11 +11,19 @@
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/game.css" />
-    <link rel="stylesheet" href="/css/clock.css" />
+    <link rel="stylesheet" href="/css/clock.css?after" />
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
+    <script>
+        var type="enter";
+        var room="<% request.getAttribute("room");%>";
+        var color="black";
 
+        console.log(room);
+
+        var webSocket = new WebSocket("ws:/localhost:9090/room="+room+"/color="+color);
+    </script>
     <script>
         // 바둑알 놓기
         document.addEventListener('DOMContentLoaded', function() {
