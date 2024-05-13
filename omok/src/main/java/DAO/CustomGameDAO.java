@@ -54,44 +54,4 @@ public class CustomGameDAO {
             System.out.println("방 전환 실패");
         }
     }
-
-
-//    public ArrayList<GameListVO> gameListSelect() { //게임 목록 조회
-//        PreparedStatement preparedStatement = null;
-//        ResultSet resultSet = null;
-//
-//        ArrayList<GameListVO> gameList = new ArrayList<>();
-//
-//        try {
-//            String query = "select * from GameList";
-//            preparedStatement = connection.prepareStatement(query);
-//            resultSet = preparedStatement.executeQuery();
-//
-//            while(resultSet.next()) {
-//                int gameId = resultSet.getInt("game_id");
-//                Boolean isCustom = resultSet.getBoolean("is_custom");
-//                String gameCode = resultSet.getString("game_code");
-//                int userId = resultSet.getInt("user_id");
-//
-//                GameListVO vo = new GameListVO();
-//                vo.setGameId(gameId);
-//                vo.setIsCustom(isCustom);
-//                vo.setGameCode(gameCode);
-//                vo.setUserId(userId);
-//                gameList.add(vo);
-//            }
-//            System.out.println("게임 목록 조회 성공");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.out.println("게임 목록 조회 실패");
-//        } finally {
-//            try {
-//                if (resultSet != null) resultSet.close();
-//                if (preparedStatement != null) preparedStatement.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return gameList;
-//    }
 }
