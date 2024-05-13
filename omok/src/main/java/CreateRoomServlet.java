@@ -1,3 +1,4 @@
+import DAO.GameDAO;
 import DAO.MainPageDAO;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 
@@ -15,20 +17,45 @@ public class CreateRoomServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.setContentType("text/html; charset=utf-8");
-        // 메인 페이지 로직
+        String room = null;
+        String type = "create"; // room number와 type
 
-        String roomType = req.getParameter("name");
+        String roomCode = null;
+        boolean isCustom = false; // db에 삽입될 내용
 
-        // 버튼 클릭 -> db 생성 -> db에서 생성된 roomnumber 가져옴
-        // 근데 그 로직 모르겠음 ㅜㅜ
+        String redirectURL = "";
+        GameDAO gameDAO = new GameDAO();
 
-        String room = "1";
+        String roomType = req.getParameter("type"); // random / custom 구분
+        System.out.println(roomType + "!!!");
+        if ("공개".equals(roomType)) { // random이면 url만 변경
+            redirectURL += "/random-game?";
+        } else { // custom이면 url, 나머지 db 변수 모두 변경
+            redirectURL += "/custom-game?";
+            isCustom = true;
+            roomCode = createRandomText().toString();
+        }
+
+        // 방 생성 및 번호 받아오기
+        gameDAO.createGame(isCustom, roomCode);
+        room = gameDAO.findRoomId().toString();
+
+
         req.setAttribute("room",room);
-        req.setAttribute("color", "black");
         req.setAttribute("type", "create");
 
-        String redirectURL = "/random?room="+room+"&color=black";
+        redirectURL += "room="+room+"&type="+type;
         res.sendRedirect(redirectURL);
+    }
+
+    public static StringBuilder createRandomText() { //방 입장 코드 생성 로직
+        String range = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //4자리 수를 추출할 문자열
+        SecureRandom secureRandom = new SecureRandom();
+        StringBuilder roomCode = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            int rand = secureRandom.nextInt(range.length()); //문자열 범위 안에서 하나 선택
+            roomCode.append(range.charAt(rand));
+        }
+        return roomCode;
     }
 }
