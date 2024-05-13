@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--사용자 설정 코드 + 복붙 버튼 추가 필요--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,19 +38,27 @@
                 var x = Math.round((Math.round(event.clientX - rect.left - 34) / 53 ))* 53 + 34; // X 좌표
                 var y = Math.round((Math.round(event.clientY - rect.top - 34) / 53 )) * 53 + 34;// Y 좌표
 
-                // 콘솔에 좌표 표시
-                <%--console.log(`X 좌표: ${x}, Y 좌표: ${y}`);--%>
+                // 반환될 x, y 좌표 계산 (0~12범위)
+                var returnX = (x-34)/53;
+                var returnY = (y-34)/53;
+
+                // 콘솔에 칸위치로 계산된 좌표 표시
+                console.log(`X 좌표: ${returnX}, Y 좌표: ${returnY}`);
+                if ( returnX < 0 || returnY < 0 || returnY > 12 || returnX > 12 ){
+                    return;
+                }
+
+
+
 
                 // 검은 바둑알 이미지 가져오기
                 const blackStone = document.createElement('img');
                 blackStone.src = '/img/blackdot.png';
                 blackStone.className = 'stone';
 
-                // 위치 초기화
+                // 바둑알 위치 초기화 및 크기 지정
                 blackStone.style.left = '0px';
                 blackStone.style.right = '0px';
-
-                // 바둑알 크기 지정
                 blackStone.style.width='53px';
                 blackStone.style.height='53px';
 
@@ -64,14 +72,18 @@
                 blackStone.style.top= stoneY + 'px';
                 blackStone.style.zIndex = '6';
 
-                // 놓인 곳에 바둑알 다시 못 놓게 << 수정해야 함
+                // 놓인 곳에 바둑알 다시 못 놓게 << 적용 안 됨 수정해야 함
                 blackStone.style.userSelect = 'none';
                 blackStone.style.pointerEvents = 'none';
 
                 // 바둑판에 요소 추가해서 돌 놓기
                 go.appendChild(blackStone);
+
+               // 소켓으로 x, y 좌표 보내주기
             });
         });
+
+
     </script>
 
 </head>
