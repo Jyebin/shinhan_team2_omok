@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-    <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/common.css"/>
-    <link rel="stylesheet" href="/css/game.css"/>
+    <link rel="stylesheet" href="/css/reset.css?after"/>
+    <link rel="stylesheet" href="/css/common.css?after"/>
+    <link rel="stylesheet" href="/css/game.css?after"/>
     <link rel="stylesheet" href="/css/clock.css"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>

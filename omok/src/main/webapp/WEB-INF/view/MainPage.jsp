@@ -103,7 +103,10 @@
                     <img src="/img/fiveomoknuni.png">
                 </div>
                 <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
-                <div class="speedEnter">빠른 입장</div>
+
+                <form action="${pageContext.request.contextPath}/enterRoom" method="get">
+                    <input type="submit" class="speedEnter" id="speedEnter" value="빠른 입장">
+                </form>
 
                 <div class="codeEnter">
                     <input class="code" type="text" placeholder="코드 입력하기"/>
