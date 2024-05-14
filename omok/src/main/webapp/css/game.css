@@ -7,7 +7,6 @@
 }
 
 
-
 .body-container-left {
     height: 100%;
     flex-basis: 800px;
@@ -47,6 +46,7 @@
 .body-container-right {
     height: 100%;
     flex-basis: 400px;
+    position: relative;
 }
 
 #clock{
@@ -66,6 +66,7 @@
     display: flex;
     flex-direction: row;
 
+
 }
 .opponent{
     display: flex;
@@ -84,7 +85,8 @@
 .opponents-id{
     width: 150px;
     height: 50px;
-    font-size: 30px;
+    font-size: 24px;
+    letter-spacing: -2px;
     background-color: #F5C266;
     line-height: 50px;
     text-align: center;
@@ -101,11 +103,13 @@
     left: -20px;
 }
 
+.codeBox {
+    margin-top: 50px;
+}
 
-
-
-
-
+.randomBox {
+    margin-top: 75px;
+}
 
 .codeBox-title{
     background: linear-gradient(#FFD281 , #F17633);
@@ -113,6 +117,8 @@
     height: 35px;
     text-align: center;
     line-height: 35px;
+    font-weight: 700;
+    letter-spacing: -2px;
     color: white;
     border-top: 5px solid #C0B8AB;
     border-left: 5px solid #C0B8AB;
@@ -124,15 +130,17 @@
 .codeBox-code{
     background: #F3F1EA;
     width: 200px;
-    height: 35px;
+    height: 50px;
     text-align: center;
-    line-height: 35px;
+    line-height: 50px;
+    letter-spacing: -2px;
     color: black;
-    font-weight: bold;
-    font-size: 20px;
+
+    font-size: 24px;
+    font-weight: 700;
+
     border-left: 5px solid #C0B8AB;
     border-right: 5px solid #C0B8AB;
-
 
 }
 
@@ -143,6 +151,8 @@
     height: 150px;
     text-align: center;
     line-height: 50px;
+    font-weight: 700;
+    letter-spacing: -2px;
 
     display: flex;
     flex-direction: column;
@@ -162,6 +172,9 @@
     height: 40px;
     color: white;
     font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -2px;
+
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 2px 0px black;
 }
@@ -174,6 +187,8 @@
     height: 40px;
     color: white;
     font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -2px;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 2px 0px black;
 }
@@ -186,7 +201,65 @@
 
 
 
+.randomBox{
+    font-weight: 700;
+    letter-spacing: -2px;
+}
 
+
+.randomBox-title{
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 170px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: white;
+    border-top: 5px solid #C0B8AB;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-radius: 30px 30px 0 0;
+    font-size: 20px;
+    letter-spacing: -2px;
+}
+
+
+
+.randomBox-button{
+    background: #e6e1db;
+    width: 170px;
+    height: 130px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-bottom: 5px solid #C0B8AB;
+    border-radius: 0 0 30px 30px;
+
+}
+
+
+
+.randomBox-buttons-convert{
+    border: none;
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 150px;
+    height: 40px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 2px 0px black;
+
+}
 
 
 
@@ -267,6 +340,8 @@
     color: black;
     border-radius: 10px 10px 10px 10px;
     outline: none;
+    font-weight: 700;
+    letter-spacing: -2px;
 }
 
 .chatfooter-inner input[type="button"]{
@@ -277,6 +352,7 @@
     border: none;
     color: white;
     font-size: 20px;
+
 }
 
 
@@ -351,14 +427,18 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+
 }
 
 
 .body-container-right .exit {
+
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
     line-height: 40px;
+    font-weight: 700;
+    letter-spacing: -2px;
     width: 200px;
     height: 40px;
     font-size: 20px;
