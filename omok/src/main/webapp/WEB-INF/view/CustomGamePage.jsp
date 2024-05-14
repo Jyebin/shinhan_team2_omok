@@ -14,12 +14,12 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
-        var type="<%=request.getAttribute("type") %>";
-        var room="<%=request.getAttribute("room")%>";
+        var type="<%=session.getAttribute("type") %>";
+        var room="<%=session.getAttribute("room")%>";
 
         console.log(room);
 
-        var webSocket = new WebSocket("ws:/localhost:9090/room="+room+"/type="+type);
+        var webSocket = new WebSocket("ws:/localhost:9090/"+room+"/"+type);
     </script>
     <script>
         function copy() {
