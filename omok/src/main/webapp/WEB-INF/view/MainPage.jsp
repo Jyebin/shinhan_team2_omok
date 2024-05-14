@@ -131,8 +131,11 @@
             <input id="exitBtn" type="button" value="X">
         </div>
         <input id="logout" type="button" value="로그아웃">
-        <input id="pwd" type="password" placeholder="pwd 입력">
-        <input id="withdraw" type="button" value="회원탈퇴">
+        <form class="formClass" action="${pageContext.request.contextPath}/register" method="post">
+            <input name="pwd" id="pwd" type="password" placeholder="pwd 입력">
+            <input name="cmd" type="hidden" value="delmember" >
+            <input id="withdraw" type="submit" value="회원탈퇴">
+        </form>
     </div>
     <div class="setting" id="select">
         <div class="setting-header">
@@ -142,7 +145,6 @@
             <input id="public" name="type" type="submit" value="공개">
             <input id="private" name="type" type="submit" value="비공개">
         </form>
-
     </div>
 </main>
 </body>
