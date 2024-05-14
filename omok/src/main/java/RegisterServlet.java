@@ -1,4 +1,4 @@
-import DAO.RegisterDAO;
+import DAO.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,24 +28,22 @@ public class RegisterServlet extends HttpServlet {
         System.out.println("pwd: "+pwd);
 
         if("addmember".equals(cmd)){
-            RegisterDAO dao = new RegisterDAO();
+            UserDAO dao = new UserDAO();
 
             boolean result = dao.addMember(id, pwd);
 
             if(result){
                 request.setAttribute("msg" , "회원이 추가되었습니다.");
                 request.setAttribute("url" , "/landing");
-
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             }else{
-                request.setAttribute("msg" , "회원추가가 실패하였습니다.");
+                request.setAttribute("msg" , "회원 추가가 실패하였습니다.");
                 request.setAttribute("url" , "/register");
-
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             }
 
         }else if ("dupcheck".equals(cmd)){
-            RegisterDAO dao = new RegisterDAO();
+            UserDAO dao = new UserDAO();
             boolean result = dao.dupCheck(id);
             System.out.println("result: "+result);
             response.setContentType("application/x-json; charset=utf-8");

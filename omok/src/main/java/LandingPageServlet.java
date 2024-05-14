@@ -35,7 +35,7 @@ public class LandingPageServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
         }
         HttpSession session = request.getSession();
-        session.setAttribute("user", vo);
+        session.setAttribute("name", vo.getUserName());
         response.sendRedirect("/main");
     }
 }
