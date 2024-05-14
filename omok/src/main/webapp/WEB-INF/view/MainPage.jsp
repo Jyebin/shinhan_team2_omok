@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-<%--폰트--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
@@ -17,9 +16,11 @@
     <link rel="stylesheet" href="/css/modal.css?after"/>
     <link rel="stylesheet" href="/css/common.css?after"/>
     <link rel="stylesheet" href="/css/main.css?after"/>
+    <link rel="stylesheet" href="/css/font.css?after"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(function() {
+            // 랭킹 검색 버튼
             $('#searchBtn').click(function() {
                 $.ajax({
                     type: "get",
@@ -69,15 +70,15 @@
                 <div class="medalists">
                     <div class="silver">
                         <div class="medal-name">${secondMember}</div>
-                        <img class="medal-silver" src="/img/silver.png" >
+                        <img class="medal-silver" src="/img/silver.png">
                     </div>
                     <div class="gold">
                         <div class="medal-name">${firstMember}</div>
-                        <img class="medal-gold" src="${pageContext.request.contextPath}/img/gold.png" >
+                        <img class="medal-gold" src="${pageContext.request.contextPath}/img/gold.png">
                     </div>
                     <div class="bronze">
                         <div class="medal-name">${thirdMember}</div>
-                        <img class="medal-bronze" src="/img/bronze.png" >
+                        <img class="medal-bronze" src="/img/bronze.png">
                     </div>
                 </div>
                 <img class="cloud" src="/img/cloud.png"/>
@@ -114,27 +115,27 @@
                         <input class="codeButton" type="submit" value="코드 입장" name="roomType">
                     </div>
                 </form>
-
             </section>
         </section>
 
     </section>
-    <div class="setting-bg"></div>
-    <div class="setting" id="set">
-        <div class="setting-header">
-            <input id="exitBtn" type="button" value="X">
+
+    <div class="modal-bg"></div>
+    <div class="modal" id="set">
+        <div class="modal-header">
+            <input class="exit" id="exitBtn" type="button" value="X">
         </div>
-        <input id="logout" type="button" value="로그아웃">
+        <input class="modal-long-button" id="logout" type="button" value="로그아웃">
         <input id="pwd" type="password" placeholder="pwd 입력">
         <input id="withdraw" type="button" value="회원탈퇴">
     </div>
-    <div class="setting" id="select">
-        <div class="setting-header">
-            <input id="selectExitBtn" type="button" value="X">
+    <div class="modal" id="select">
+        <div class="modal-header">
+            <input class="exit" id="selectExitBtn" type="button" value="X">
         </div>
         <form class="formClass" action="${pageContext.request.contextPath}/createRoom" method="get">
-            <input id="public" name="type" type="submit" value="공개">
-            <input id="private" name="type" type="submit" value="비공개">
+            <input class="modal-long-button" id="public" name="type" type="submit" value="공개">
+            <input class="modal-long-button" id="private" name="type" type="submit" value="비공개">
         </form>
 
     </div>
