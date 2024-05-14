@@ -17,8 +17,7 @@
     <script>
         var type="<%=session.getAttribute("type") %>";
         var room="<%=session.getAttribute("room")%>";
-
-        console.log(room);
+        var name="<%=session.getAttribute("name")%>"
 
         var webSocket = new WebSocket("ws:/localhost:9090/"+room+"/"+type);
     </script>
