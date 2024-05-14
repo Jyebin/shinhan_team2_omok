@@ -195,39 +195,10 @@
 
                 <div class="chat">
                     <div class="chatheader"></div>
-                    <div class="chatmain">
-                        <div class="chatmain-left-container">
-                            <div class="chatmain-left">asdlkfjllorem</div>
-                        </div>
-
-                        <div class="chatmain-right-container">
-                            <div class="chatmain-right">Lorem ipsum dosdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdlor sitit.
-                            </div>
-                        </div>
-
-                        <div class="chatmain-left-container">
-                            <div class="chatmain-left">asdlkfjllorem</div>
-                        </div>
-                        <div class="chatmain-left-container">
-                            <div class="chatmain-left">asdlkfjllorem</div>
-                        </div>
-                        <div class="chatmain-left-container">
-                            <div class="chatmain-left">asdlkfjllorem</div>
-                        </div>
-                        <div class="chatmain-right-container">
-                            <div class="chatmain-right">werwefdfdsdfsdfsdfsdfsdfsdfsdf</div>
-                        </div>
-                        <div class="chatmain-right-container">
-                            <div class="chatmain-right">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Impedit
-                                exercitationem hic suscipit quas, aut cum consectetur quasi itaque laboriosam vero
-                                quisquam? Qui, quia aut ipsam ipsa consectetur necessitatibus! Placeat, obcaecati.
-                            </div>
-                        </div>
-                    </div>
+                    <div class="chatmain"></div>
                     <div class="chatfooter">
                         <div class="chatfooter-inner">
-                            <input type="text"/><input type="button" value="전송">
+                            <input id="msgtext" type="text"/><input type="button" id="msgbutton" value="전송">
                         </div>
                     </div>
                 </div>
