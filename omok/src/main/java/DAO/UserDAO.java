@@ -24,12 +24,12 @@ public class UserDAO {
         }
     }
 
+    // 회원 등록
     public boolean addMember(String paramId, String paramPwd) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         boolean result = false;
-        UserVO vo = null;
         try {
             con = dataSource.getConnection();
             String query = "insert into user ( user_name , user_pw , user_win_cnt , user_game_cnt ) values (? , ? , 0 , 0)";
@@ -42,32 +42,50 @@ public class UserDAO {
             } else {
                 result = true;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                resultSet.close();
-            } catch (Exception e) {
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-            }
-            try {
-                con.close();
-            } catch (Exception e) {
-            }
+            try { resultSet.close(); } catch (Exception e) { }
+            try { preparedStatement.close(); } catch (Exception e) { }
+            try { con.close(); } catch (Exception e) { }
         }
         return result;
     }
 
+    // 회원 삭제
+    public boolean delMember(String paramId, String paramPwd) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        boolean result = false;
+        try {
+            con = dataSource.getConnection();
+            String query = "delete from user where user_name = ? and user_pw = ?";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, paramId);
+            preparedStatement.setString(2, paramPwd);
+            int row = preparedStatement.executeUpdate();
+            if (row == 0) {
+                result = false;
+            } else {
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { resultSet.close(); } catch (Exception e) { }
+            try { preparedStatement.close(); } catch (Exception e) { }
+            try { con.close(); } catch (Exception e) { }
+        }
+        return result;
+    }
+
+    // 아이디 중복 체크
     public boolean dupCheck(String paramId) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         boolean result = true;
-        UserVO vo = null;
         try {
             con = dataSource.getConnection();
             String query = "select COUNT(*) cnt from user where user_name=?";
@@ -85,18 +103,9 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                resultSet.close();
-            } catch (Exception e) {
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-            }
-            try {
-                con.close();
-            } catch (Exception e) {
-            }
+            try { resultSet.close(); } catch (Exception e) { }
+            try { preparedStatement.close(); } catch (Exception e) { }
+            try { con.close(); } catch (Exception e) { }
         }
         return result;
     }
