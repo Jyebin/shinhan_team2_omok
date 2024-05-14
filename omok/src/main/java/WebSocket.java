@@ -76,6 +76,21 @@ public class WebSocket {
                     waitingSession.getBasicRemote().sendText(data.toString());
                 }
             }
+        } // chat 이벤트 끝
+        else if ("naming".equals(jsonObject.get("event"))) {
+            // 이름 주고받는 이벤트 시작
+            while (fullRoom.get(room) == null) {
+                // 무한 루프, room 번호로 fullRoom이 생기면 탈출
+            }
+            int sessionIndex = 0;
+            JSONObject data = new JSONObject();
+            data.put("enemyName", jsonObject.get("enemyName"));
+            data.put("event", "naming");
+            if (recieveSession == fullRoom.get(room).get(0)) {
+                sessionIndex = 1;
+            }
+            Session waitingSession = fullRoom.get(room).get(sessionIndex);
+            waitingSession.getAsyncRemote().sendText(data.toString());
         }
     }
 
