@@ -28,7 +28,7 @@
             let chatmain = document.querySelector("#chatmain");
 
             webSocket.onopen = function (e) {
-                chatmain.insertAdjacentHTML('beforeend', "<div class='chatmain-right-container'><div class='chatmain-right'>" + "방이 생성 되었습니다." + "</div></div>");
+                chatmain.insertAdjacentHTML('beforeend', "<div class='chatmain-right-container'><div class='chatmain-right'>" + "방에 입장 하였습니다." + "</div></div>");
 
                 const namingData = {
                     enemyName: name,
@@ -53,8 +53,6 @@
                     // 여기에 수정~~~
                 } else if (obj.event == 'naming') {
                     const enemyName = obj.enemyName;
-                    chatmain.insertAdjacentHTML('beforeend', '<div class="chatmain-left-container"><div class="chatmain-left">' + enemyName + "님이 입장 하였습니다." + '</div></div>');
-
                     console.log(enemyName);
                     document.getElementById("enemy").append(enemyName);
                 }
@@ -64,6 +62,7 @@
                 let obj = {};
                 obj.message = msgtext.value;
                 obj.event = 'chat';
+                // let text = msgtext.value;
 
                 webSocket.send(JSON.stringify(obj));
                 document.querySelector("#msgtext").value = '';
