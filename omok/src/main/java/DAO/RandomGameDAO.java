@@ -34,8 +34,6 @@ public class RandomGameDAO {
         }
     }
 
-
-    // 여기서부터 5/13
     // 참여 가능 공개방 확인, 있다면 room_id 반환
     public int canJoinRandomRoomId(){
         Connection con = null;
@@ -139,6 +137,4 @@ public class RandomGameDAO {
             }
         }
     }
-
-
 }
