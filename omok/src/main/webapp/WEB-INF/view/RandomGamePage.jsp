@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +16,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
-        var room = "<%= request.getParameter("room")%>";
-        var type = "<%= request.getParameter("type")%>";
-
-        console.log("room : " + room);
-        console.log("room : " + type);
+        var room = "<%= session.getAttribute("room")%>";
+        var type = "<%= session.getAttribute("type")%>";
+        var name = "<%= session.getAttribute("name")%>"
 
         var webSocket;
         window.onload = function () {
@@ -29,10 +27,14 @@
             let msgtext = document.querySelector("#msgtext");
             let chatmain = document.querySelector("#chatmain");
 
-            //"<div className='chatmain-right-container'><div className='chatmain-right'>"+ werwefdfdsdfsdfsdfsdfsdfsdfsdf+"</div></div>";
-
             webSocket.onopen = function (e) {
                 chatmain.insertAdjacentHTML('beforeend', "<div class='chatmain-right-container'><div class='chatmain-right'>" + "방에 입장 하였습니다." + "</div></div>");
+
+                const namingData = {
+                    enemyName: name,
+                    event: "naming"
+                }
+                webSocket.send(JSON.stringify(namingData));
             };
 
             // WebSocket 서버로 부터 메시지가 오면 호출되는 함수
@@ -49,6 +51,10 @@
 
                 } else if (obj.event == "omok") {
                     // 여기에 수정~~~
+                } else if (obj.event == 'naming') {
+                    const enemyName = obj.enemyName;
+                    console.log(enemyName);
+                    document.getElementById("enemy").append(enemyName);
                 }
             };
 
@@ -143,12 +149,12 @@
                     <div class="opponent">
                         <img class="opponents-dot" src="/img/blackdot.png"/>
                         <img class="opponents-img" src="/img/right_character.png">
-                        <div class="opponents-id"><img class="me" src="/img/mestar.png">IDIDID</div>
+                        <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
                     <div class="opponent">
                         <img class="opponents-dot" src="/img/whitedot.png"/>
                         <img class="opponents-img" src="/img/left_character.png">
-                        <div class="opponents-id">IDIDID</div>
+                        <div class="opponents-id" id="enemy"></div>
                     </div>
                 </div>
 
