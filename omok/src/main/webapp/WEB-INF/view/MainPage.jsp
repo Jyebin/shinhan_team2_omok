@@ -106,7 +106,7 @@
             </aside>
             <section class="body-container-right">
                 <div class="fiveomoknuni-container">
-                    <img src="/img/fiveomoknuni.png">
+                    <img src="/img/fiveomoknuni.png" class="fiveomoknuni">
                 </div>
                 <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
 

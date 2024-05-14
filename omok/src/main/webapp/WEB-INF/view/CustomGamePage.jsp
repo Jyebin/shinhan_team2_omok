@@ -39,7 +39,9 @@
             form.setAttribute('method' , 'get');
             form.setAttribute('action' , '${pageContext.request.contextPath}/createRoom');
             const data = document.createElement('input');
-            data.setAttribute("type" , "공개");
+            data.setAttribute('name' , 'type');
+            data.setAttribute('type', 'hidden');
+            data.setAttribute('value','공개');
             form.appendChild(data);
 
             document.body.appendChild(form);
