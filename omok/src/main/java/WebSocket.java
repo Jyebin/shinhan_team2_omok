@@ -46,18 +46,17 @@ public class WebSocket {
 
     // WebSocket으로 메시지가 오면 요청되는 메서드
     @OnMessage
-    public void handleMessage(Session session, @PathParam("room") String room, String message) {
+    public void handleMessage(Session session, String message) {
         try {
             // JSON 파싱
             JSONObject jsonObject = new JSONObject(message);
             String isOmok = jsonObject.getString("event");
             if (isOmok.equals("omok")) {
                 System.out.println("메세지 : " + message);
-
+                System.out.println("세션 ID: " + session.getId());
                 int x = jsonObject.getInt("x");
                 int y = jsonObject.getInt("y");
                 System.out.println("세션으로 받은 좌표: x=" + x + ", y=" + y);
-
                 processOmok(x, y, session);
             }
         } catch (Exception e) {
@@ -65,10 +64,11 @@ public class WebSocket {
         }
     }
 
-    private void processOmok(int x, int y, Session session){
+    private void processOmok(int x, int y, Session session) {
         //좌표에 돌을 둠
-        broadCastOmokMove(x,y,session); //전달
+        broadCastOmokMove(x, y, session); //전달
     }
+
     private void broadCastOmokMove(int x, int y, Session session) {
         // 현재 방에 있는 모든 클라이언트에게 오목 돌 놓기 이벤트 메시지 전송
         for (List<Session> sessions : fullRoom.values()) {
@@ -78,7 +78,7 @@ public class WebSocket {
                     jsonObject.put("event", "omok");
                     jsonObject.put("x", x);
                     jsonObject.put("y", y);
-                    System.out.println("상대에게 전송된 좌표 x:"+x+"y:"+y);
+                    System.out.println("상대에게 전송된 좌표 x:" + x + "y:" + y);
                     s.getAsyncRemote().sendText(jsonObject.toString());
                 }
             }

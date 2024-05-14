@@ -17,74 +17,80 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script>
-        var type = "<%=session.getAttribute("type")%>";
+        var type = "<%=session.getAttribute("type")%>"; //처음에 create, 두번째는 enter
         var room = "<%=session.getAttribute("room")%>";
-
         console.log(room);
         console.log(type);
 
         var webSocket = new WebSocket("ws:/localhost:9090/" + room + "/" + type);
+        var currentUser;
+        if (type == "create") currentUser = "O";
+        else currentUser = "X";
     </script>
     <script>
-        // 바둑알 놓기
+        // 초기 type 설정
         document.addEventListener('DOMContentLoaded', function () {
             const board = document.getElementById('checkerboard-img');
             const go = document.getElementById('go');
+            console.log(2);
 
             board.addEventListener('click', function (event) {
-                // 이미지 내에서의 좌표를 구하기 위해 offset 사용
-                const rect = board.getBoundingClientRect();
-
-
-                // 클릭한 곳으로부터 가장 가까운 점에 바둑알 놓이게
-                var x = Math.round((Math.round(event.clientX - rect.left - 34) / 53)) * 53 + 34; // X 좌표
-                var y = Math.round((Math.round(event.clientY - rect.top - 34) / 53)) * 53 + 34;// Y 좌표
-
-                // 반환될 x, y 좌표 계산 (0~12범위)
-                var returnX = (x - 34) / 53;
-                var returnY = (y - 34) / 53;
-
-                // 콘솔에 칸위치로 계산된 좌표 표시
-                console.log(`X 좌표: ${returnX}, Y 좌표: ${returnY}`);
-                if (returnX < 0 || returnY < 0 || returnY > 12 || returnX > 12) {
-                    return;
+                if (currentUser == "X") {
+                    alert("순서가 아닙니다.");
                 }
+                else {
+                    // 이미지 내에서의 좌표를 구하기 위해 offset 사용
+                    const rect = board.getBoundingClientRect();
 
-                // 검은 바둑알 이미지 가져오기
-                const blackStone = document.createElement('img');
-                blackStone.src = '/img/blackdot.png';
-                blackStone.className = 'stone';
+                    // 클릭한 곳으로부터 가장 가까운 점에 바둑알 놓이게
+                    var x = Math.round((Math.round(event.clientX - rect.left - 34) / 53)) * 53 + 34; // X 좌표
+                    var y = Math.round((Math.round(event.clientY - rect.top - 34) / 53)) * 53 + 34;// Y 좌표
 
-                // 바둑알 위치 초기화 및 크기 지정
-                blackStone.style.left = '0px';
-                blackStone.style.right = '0px';
-                blackStone.style.width = '53px';
-                blackStone.style.height = '53px';
+                    // 반환될 x, y 좌표 계산 (0~12범위)
+                    var returnX = (x - 34) / 53;
+                    var returnY = (y - 34) / 53;
 
-                // 클릭한 곳이 바둑알의 중심 좌표가 되게
-                var stoneX = x - (blackStone.width / 2);
-                var stoneY = y - (blackStone.height / 2);
+                    // 콘솔에 칸위치로 계산된 좌표 표시
+                    console.log(`X 좌표: ${returnX}, Y 좌표: ${returnY}`);
+                    if (returnX < 0 || returnY < 0 || returnY > 12 || returnX > 12) {
+                        return;
+                    }
 
-                // css 속성으로 바둑알 위치 지정
-                blackStone.style.position = 'absolute';
-                blackStone.style.left = stoneX + 'px';
-                blackStone.style.top = stoneY + 'px';
-                blackStone.style.zIndex = '6';
+                    // 검은 바둑알 이미지 가져오기
+                    const blackStone = document.createElement('img');
+                    blackStone.src = '/img/blackdot.png';
+                    blackStone.className = 'stone';
 
-                // 놓인 곳에 바둑알 다시 못 놓게 << 적용 안 됨 수정해야 함
-                blackStone.style.userSelect = 'none';
-                blackStone.style.pointerEvents = 'none';
+                    // 바둑알 위치 초기화 및 크기 지정
+                    blackStone.style.left = '0px';
+                    blackStone.style.right = '0px';
+                    blackStone.style.width = '53px';
+                    blackStone.style.height = '53px';
 
-                // 바둑판에 요소 추가해서 돌 놓기
-                go.appendChild(blackStone);
+                    // 클릭한 곳이 바둑알의 중심 좌표가 되게
+                    var stoneX = x - (blackStone.width / 2);
+                    var stoneY = y - (blackStone.height / 2);
 
-                // 소켓으로 x, y 좌표 보내주기
-                var message = {
-                    x: returnX,
-                    y: returnY,
-                    event: 'omok'
-                };
-                webSocket.send(JSON.stringify(message));
+                    // css 속성으로 바둑알 위치 지정
+                    blackStone.style.position = 'absolute';
+                    blackStone.style.left = stoneX + 'px';
+                    blackStone.style.top = stoneY + 'px';
+                    blackStone.style.zIndex = '6';
+
+                    // 놓인 곳에 바둑알 다시 못 놓게 << 적용 안 됨 수정해야 함
+                    blackStone.style.userSelect = 'none';
+                    blackStone.style.pointerEvents = 'none';
+                    // 바둑판에 요소 추가해서 돌 놓기
+                    go.appendChild(blackStone);
+                    // 소켓으로 x, y 좌표 보내주기
+                    var message = {
+                        x: returnX,
+                        y: returnY,
+                        event: 'omok'
+                    };
+                    webSocket.send(JSON.stringify(message));
+                    currentUser = "X";
+                }
             });
         });
     </script>
@@ -97,7 +103,10 @@
                 var x2 = message.x;
                 var y2 = message.y;
 
+                currentUser = "O";
+
                 console.log(`X 좌표: ${x2}, Y 좌표: ${y2}`);
+                console.log(currentUser);
 
                 if (x2 < 0 || y2 < 0 || y2 > 12 || x2 > 12) {
                     return;
@@ -130,8 +139,9 @@
                 blackStone.style.zIndex = '6';
 
                 go.appendChild(blackStone);
-            };
+            }
         }
+
     </script>
 
 
