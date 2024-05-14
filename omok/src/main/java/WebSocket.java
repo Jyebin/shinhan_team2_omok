@@ -12,19 +12,22 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/{room}/{type}")
 public class WebSocket {
     // 대기 방, 꽉찬 방 리스트
-    Map<String, List<Session>> waitingRoom = new LinkedHashMap<>();
-    Map<String, List<Session>> fullRoom = new HashMap<>();
+    private static Map<String, List<Session>> waitingRoom = new LinkedHashMap<>();
+    private static Map<String, List<Session>> fullRoom = new HashMap<>();
+    // 이 메모리가 공유가 안 됨,, 각자 객체를 생성해서 그런ㄷ ㅡㅅ
 
     // WebSocket으로 브라우저가 접속하면 요청되는 함수
     // type -> create, enter로 나뉨 ,, 로직 다시 짜야됨
     @OnOpen
-    public void handleOpen(Session sess, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
+    public void handleOpen(Session sess, @PathParam("room") String room, @PathParam("type") String type) throws IOException {
         System.out.println("socket loading");
+        System.out.println("type : " + type);
         if ("create".equals(type)) {
             // 방 생성 로직
             List<Session> newRoom = new ArrayList<>();
             newRoom.add(sess);
             waitingRoom.put(room, newRoom);
+            System.out.println(waitingRoom.size() + " 개 존재");
         }
         else if ("enter".equals(type)) {
             // 방 입장 로직

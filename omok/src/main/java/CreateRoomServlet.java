@@ -41,13 +41,11 @@ public class CreateRoomServlet extends HttpServlet {
         gameDAO.createGame(isCustom, roomCode);
         room = gameDAO.findRoomId().toString();
 
-
-        req.setAttribute("room",room);
-        req.setAttribute("type", "create");
-
         // 세션에 정보 저장
         HttpSession session = req.getSession();
         session.setAttribute("roomCode", roomCode);
+        session.setAttribute("room", room);
+        session.setAttribute("type", type);
 
         redirectURL += "room="+room+"&type="+type;
         res.sendRedirect(redirectURL);
