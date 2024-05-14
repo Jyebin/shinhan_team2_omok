@@ -52,9 +52,9 @@
                     // 여기에 수정~~~
                 } else if (obj.event == 'naming') {
                     const enemyName = obj.enemyName;
-                    document.getElementById("codeBox").hide();
-                    document.getElementById("opponentEnter").show();
-                    document.getElementById("enemy").append(enemyName);
+                    $('#codeBox').hide();
+                    $('#opponentEnter').show();
+                    document.getElementById("customEnemy").append(enemyName);
                 }
             };
 
@@ -178,7 +178,7 @@
                     <div class="opponent opponent2" id="opponentEnter">
                         <img class="opponents-dot" src="/img/whitedot.png"/>
                         <img class="opponents-img" src="/img/left_character.png">
-                        <div class="opponents-id" id="enemy"></div>
+                        <div class="opponents-id" id="customEnemy"></div>
                     </div>
                     <div class="codeBox" id="codeBox">
                         <div class="codeBox-title">참여자 대기중</div>
@@ -195,7 +195,7 @@
 
                 <div class="chat">
                     <div class="chatheader"></div>
-                    <div class="chatmain"></div>
+                    <div id="chatmain" class="chatmain"></div>
                     <div class="chatfooter">
                         <div class="chatfooter-inner">
                             <input id="msgtext" type="text"/><input type="button" id="msgbutton" value="전송">
