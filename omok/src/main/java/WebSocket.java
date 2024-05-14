@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.*;
 
+import org.json.JSONObject;
+
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -28,8 +30,7 @@ public class WebSocket {
             newRoom.add(sess);
             waitingRoom.put(room, newRoom);
             System.out.println(waitingRoom.size() + " 개 존재");
-        }
-        else if ("enter".equals(type)) {
+        } else if ("enter".equals(type)) {
             // 방 입장 로직
             List<Session> findRoom = waitingRoom.get(room);
             if (findRoom == null) { // 방이 없을 경우
@@ -45,11 +46,43 @@ public class WebSocket {
 
     // WebSocket으로 메시지가 오면 요청되는 메서드
     @OnMessage
-    public void handleMessage(Session recieveSession, String message) {
-        // 메시지 내용을 콘솔에 출력
-        System.out.println(message);
+    public void handleMessage(Session session, @PathParam("room") String room, String message) {
+        try {
+            // JSON 파싱
+            JSONObject jsonObject = new JSONObject(message);
+            String isOmok = jsonObject.getString("event");
+            if (isOmok.equals("omok")) {
+                System.out.println("메세지 : " + message);
 
+                int x = jsonObject.getInt("x");
+                int y = jsonObject.getInt("y");
+                System.out.println("세션으로 받은 좌표: x=" + x + ", y=" + y);
 
+                processOmok(x, y, session);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void processOmok(int x, int y, Session session){
+        //좌표에 돌을 둠
+        broadCastOmokMove(x,y,session); //전달
+    }
+    private void broadCastOmokMove(int x, int y, Session session) {
+        // 현재 방에 있는 모든 클라이언트에게 오목 돌 놓기 이벤트 메시지 전송
+        for (List<Session> sessions : fullRoom.values()) {
+            for (Session s : sessions) {
+                if (!s.equals(session)) { // 다른 클라이언트에게 전송
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("event", "omok");
+                    jsonObject.put("x", x);
+                    jsonObject.put("y", y);
+                    System.out.println("상대에게 전송된 좌표 x:"+x+"y:"+y);
+                    s.getAsyncRemote().sendText(jsonObject.toString());
+                }
+            }
+        }
     }
 
     // WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
