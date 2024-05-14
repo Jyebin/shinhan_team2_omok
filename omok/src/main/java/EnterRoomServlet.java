@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "enterRoomServlet", value = "/enterRoom")
 public class EnterRoomServlet extends HttpServlet {
@@ -13,7 +14,7 @@ public class EnterRoomServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.setContentType("text/html; charset=utf-8");
 
-        String roomId;
+        String roomId = "0";
         String gameType = "";
         RandomGameDAO randomGameDAO = new RandomGameDAO();
 
@@ -28,12 +29,22 @@ public class EnterRoomServlet extends HttpServlet {
             gameType = "random";
         }
 
-        req.setAttribute("type", "enter");
-        req.setAttribute("room", roomId);
+        if("0".equals(roomId)){
+            // 방 없을 경우 alert 띄움
+            req.setAttribute("msg" , "참여할 수 있는 방이 없습니다.");
+            req.setAttribute("url" , "/main");
 
-        System.out.println("enter room 서블릿 실행");
-        String redirectURL = "/"+ gameType+"-game?room="+roomId+"&type=enter";
+            req.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(req, res);
+        }
+        else{
+            req.setAttribute("type", "enter");
+            req.setAttribute("room", roomId);
 
-        res.sendRedirect(redirectURL);
+            System.out.println("enter room 서블릿 실행");
+            String redirectURL = "/"+ gameType+"-game?room="+roomId+"&type=enter";
+
+            res.sendRedirect(redirectURL);
+        }
+
     }
 }
