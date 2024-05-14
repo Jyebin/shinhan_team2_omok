@@ -70,15 +70,15 @@ public class RegisterDAO {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-            boolean result = true;
-            UserVO vo =null;
-            try {
-                con = dataSource.getConnection();
-                String query = "select COUNT(*) cnt from user where user_name=?";
-                preparedStatement = con.prepareStatement(query);
-                preparedStatement.setString(1 , paramId);
-                resultSet = preparedStatement.executeQuery();
-                resultSet.next();
+        boolean result = true;
+        UserVO vo =null;
+        try {
+            con = dataSource.getConnection();
+            String query = "select COUNT(*) cnt from user where user_name=?";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1 , paramId);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
             int row = resultSet.getInt("cnt");
             System.out.println("row: "+row);
             if(row == 1){
