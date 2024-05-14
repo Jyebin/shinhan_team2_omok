@@ -209,7 +209,7 @@
 
 .randomBox-title{
     background: linear-gradient(#FFD281 , #F17633);
-    width: 170px;
+    width: 180px;
     height: 35px;
     text-align: center;
     line-height: 35px;
@@ -228,7 +228,7 @@
 
 .randomBox-button{
     background: #e6e1db;
-    width: 170px;
+    width: 180px;
     height: 130px;
     text-align: center;
     line-height: 50px;
@@ -255,7 +255,7 @@
     font-weight: 700;
     letter-spacing: -2px;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 2px 0px black;
 
