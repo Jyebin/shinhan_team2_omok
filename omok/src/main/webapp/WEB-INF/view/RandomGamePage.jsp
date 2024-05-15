@@ -18,9 +18,11 @@
     <script> // 변수 초기화
         var room = "<%= session.getAttribute("room")%>";
         var type = "<%= session.getAttribute("type")%>";
-        var name = "<%= session.getAttribute("name")%>"
+        var name = "<%= session.getAttribute("name")%>";
+
 
         var webSocket;
+
         var currentUser;
         var myStoneColor, enemyStoneColor;
 
@@ -182,6 +184,11 @@
                     currentUser = "X";
                 }
             });
+
+            var exit = document.getElementById("exit");
+            exit.addEventListener('click', function (event) {
+              webSocket.close();
+            })
         });
     </script>
 </head>
@@ -226,7 +233,10 @@
                     </div>
                 </div>
                 <div class="exit-container">
-                    <div class="exit">게임 나가기</div>
+                    <form action="/main" method="get">
+                        <input type="submit" class="exit" id="exit" value="게임 나가기"/>
+                    </form>
+
                 </div>
             </aside>
         </section>

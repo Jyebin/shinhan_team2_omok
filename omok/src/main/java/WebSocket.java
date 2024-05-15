@@ -78,6 +78,7 @@ public class WebSocket {
         if (board.check(x, y, session)) {
             // 승패가 갈렸는지 여부 체크
             // 갈렸으면 -> winner에게 win 담긴 msg 전달, loser에게 lose 담긴 msg 전달
+
         }
     }
 
@@ -98,8 +99,11 @@ public class WebSocket {
 
     // WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
     @OnClose
-    public void handleClose() {
-        System.out.println("client is now disconnected...");
+    public void handleClose(@PathParam("room") String room, Session session) throws IOException {
+        System.out.println("게임 나가기! 소켓 연결 종료");
+        gameBoard.remove(room);
+        gameRoom.remove(room);
+        session.close();
     }
 
     // WebSocket과 브라우저 간에 통신 에러가 발생하면 요청되는 함수.

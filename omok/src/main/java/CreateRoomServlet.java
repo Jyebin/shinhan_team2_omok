@@ -1,5 +1,4 @@
 import DAO.GameDAO;
-import DAO.MainPageDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,12 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.SecureRandom;
-import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "createRoomServlet", value = "/createRoom")
 public class CreateRoomServlet extends HttpServlet {
