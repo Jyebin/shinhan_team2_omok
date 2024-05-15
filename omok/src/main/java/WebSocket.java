@@ -1,6 +1,4 @@
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.*;
@@ -50,41 +48,38 @@ public class WebSocket {
 
     // WebSocket으로 메시지가 오면 요청되는 메서드
     @OnMessage
-    public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException, ParseException {
+    public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
         System.out.println(room);
         System.out.println(message);
         System.out.println(type);
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)parser.parse(message);
-        System.out.println("jsonObject.get(\"event\") : "+jsonObject.get("event"));
+        JSONObject jsonObject = new JSONObject(message);
+        JSONObject data = new JSONObject();
+        System.out.println("jsonObject.get(\"event\") : "+jsonObject.getString("event"));
         if(jsonObject.get("event").equals("chat")){
             if (this.fullRoom.get(room)==null){
-                JSONObject data = new JSONObject();
                 data.put("room", room);
                 data.put("type", type);
-                data.put("message", jsonObject.get("message"));
+                data.put("message", jsonObject.getString("message"));
                 data.put("event" , "chat");
                 recieveSession.getBasicRemote().sendText(data.toString());
             } else {
                 for(int i = 0; i < this.fullRoom.get(room).size(); ++i) {
                     Session waitingSession = this.fullRoom.get(room).get(i);
-                    JSONObject data = new JSONObject();
                     data.put("room", room);
                     data.put("type", type);
-                    data.put("message", jsonObject.get("message"));
+                    data.put("message", jsonObject.getString("message"));
                     data.put("event" , "chat");
                     waitingSession.getBasicRemote().sendText(data.toString());
                 }
             }
         } // chat 이벤트 끝
-        else if ("naming".equals(jsonObject.get("event"))) {
+        else if ("naming".equals(jsonObject.getString("event"))) {
             // 이름 주고받는 이벤트 시작
             while (fullRoom.get(room) == null) {
                 // 무한 루프, room 번호로 fullRoom이 생기면 탈출
             }
             int sessionIndex = 0;
-            JSONObject data = new JSONObject();
-            data.put("enemyName", jsonObject.get("enemyName"));
+            data.put("enemyName", jsonObject.getString("enemyName"));
             data.put("event", "naming");
             if (recieveSession == fullRoom.get(room).get(0)) {
                 sessionIndex = 1;

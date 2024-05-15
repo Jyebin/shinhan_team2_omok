@@ -53,7 +53,6 @@
                     // 여기에 수정~~~
                 } else if (obj.event == 'naming') {
                     const enemyName = obj.enemyName;
-                    console.log(enemyName);
                     document.getElementById("enemy").append(enemyName);
                 }
             };
