@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RandomGameDAO {
     private Connection con = null;
@@ -33,8 +34,6 @@ public class RandomGameDAO {
         }
     }
 
-
-    // 여기서부터 5/13
     // 참여 가능 공개방 확인, 있다면 room_id 반환
     public int canJoinRandomRoomId(){
         Connection con = null;
@@ -85,9 +84,9 @@ public class RandomGameDAO {
 
         try {
             con = dataSource.getConnection();
-            String query = "select game_id from gamelist where game_code like ?";
+            String query = "select game_id from gamelist where game_code like ? and can_enter = true";
             pstmt = con.prepareStatement(query);
-            pstmt.setString(1, code);
+            pstmt.setString(1, code.toUpperCase(Locale.ROOT));
             resultSet = pstmt.executeQuery();
 
             if(resultSet.next()){
@@ -138,6 +137,4 @@ public class RandomGameDAO {
             }
         }
     }
-
-
 }

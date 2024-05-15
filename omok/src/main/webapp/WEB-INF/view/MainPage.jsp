@@ -54,6 +54,12 @@
                 $('.setting-bg').hide();
                 $('#select').hide();
             })
+            $("#logout").click(function() {
+                $.get("/logout", function(data, status) {
+                    alert("로그아웃 됐습니다.");
+                    window.location.href = "/landing";
+                });
+            });
         }) // end function
     </script>
 

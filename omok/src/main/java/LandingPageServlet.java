@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "landingServlet", value = "/landing")
 public class LandingPageServlet extends HttpServlet {
@@ -28,22 +27,15 @@ public class LandingPageServlet extends HttpServlet {
         // 랭킹을 위해 멤버 정보 받아오기
         LandingDAO dao = new LandingDAO();
 
-        UserVO vo = dao.loginCheck(id , pwd);
-        if(vo == null){
-        request.setAttribute("msg" , "회원정보가 일치하지 않습니다.");
-        request.setAttribute("url" , "/landing");
-
-        request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
+        UserVO vo = dao.loginCheck(id, pwd);
+        System.out.println(vo);
+        if (vo == null) {
+            request.setAttribute("msg", "회원정보가 일치하지 않습니다.");
+            request.setAttribute("url", "/landing");
+            request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
         }
-
-        HttpSession session=request.getSession();
-
-        session.setAttribute("user", vo);
-
+        HttpSession session = request.getSession();
+        session.setAttribute("name", vo.getUserName());
         response.sendRedirect("/main");
-
-
     }
-
-
 }
