@@ -17,11 +17,8 @@ public class WebSocket {
      private static Map<String, List<Session>> waitingRoom = new LinkedHashMap<>();
      private static Map<String, List<Session>> fullRoom = new LinkedHashMap<>();
 
-    // WebSocket으로 브라우저가 접속하면 요청되는 함수
     @OnOpen
     public void handleOpen(Session sess, @PathParam("room") String room, @PathParam("type") String type) throws IOException {
-        System.out.println("socket loading");
-        System.out.println("type : " + type);
         if ("create".equals(type)) {
             // 방 생성 로직
             List<Session> newRoom = new ArrayList<>();
@@ -31,30 +28,20 @@ public class WebSocket {
             // 방 입장 로직
             List<Session> findRoom = waitingRoom.get(room);
             if (findRoom == null) { // 방이 없을 경우
-                System.out.println("create- "+waitingRoom.size() + " 개 존재");
                 sess.getAsyncRemote().sendText("방이 존재하지 않습니다.");
                 sess.close();
             }
-            System.out.println("enter room: "+room);
-            System.out.println("waitingRoom: "+waitingRoom);
-            System.out.println("waitingRoomSize: "+waitingRoom.size());
             waitingRoom.get(room).add(sess); // 기존 방 session list에 새로 입장한 사람 session 넣고
 
             fullRoom.put(room, waitingRoom.get(room)); // room, arraylist 그대로 fullRoom에 삽입
             waitingRoom.remove(room); // 기존 대기방에서 삭제
         }
-        System.out.println("clear");
     }
 
-    // WebSocket으로 메시지가 오면 요청되는 메서드
     @OnMessage
     public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
-        System.out.println(room);
-        System.out.println(message);
-        System.out.println(type);
         JSONObject jsonObject = new JSONObject(message);
         JSONObject data = new JSONObject();
-        System.out.println("jsonObject.get(\"event\") : "+jsonObject.getString("event"));
         if(jsonObject.get("event").equals("chat")){
             if (this.fullRoom.get(room)==null){
                 data.put("room", room);
@@ -86,6 +73,31 @@ public class WebSocket {
             }
             Session waitingSession = fullRoom.get(room).get(sessionIndex);
             waitingSession.getAsyncRemote().sendText(data.toString());
+        }
+        else if ("omok".equals(jsonObject.getString("event"))) {
+            int x = jsonObject.getInt("x");
+            int y = jsonObject.getInt("y");
+            processOmok(x, y, recieveSession);
+        }
+    }
+
+    private void processOmok(int x, int y, Session session) {
+        //좌표에 돌을 둠
+        broadCastOmokMove(x, y, session); //전달
+    }
+
+    private void broadCastOmokMove(int x, int y, Session session) {
+        // 현재 방에 있는 모든 클라이언트에게 오목 돌 놓기 이벤트 메시지 전송
+        for (List<Session> sessions : fullRoom.values()) {
+            for (Session s : sessions) {
+                if (!s.equals(session)) { // 다른 클라이언트에게 전송
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("event", "omok");
+                    jsonObject.put("x", x);
+                    jsonObject.put("y", y);
+                    s.getAsyncRemote().sendText(jsonObject.toString());
+                }
+            }
         }
     }
 
