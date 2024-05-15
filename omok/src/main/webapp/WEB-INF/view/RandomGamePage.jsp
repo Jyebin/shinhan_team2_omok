@@ -40,6 +40,11 @@
     <script>
         window.onload = function () {
             webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
+
+            // 캐릭터 머리 위 바둑알 색 설정
+            document.querySelector("#myStone").src = '/img/'+myStoneColor+'dot.png';
+            document.querySelector("#enemyStone").src = '/img/'+enemyStoneColor+'dot.png';
+
             let msgbutton = document.querySelector("#msgbutton");
             let msgtext = document.querySelector("#msgtext");
             let chatmain = document.querySelector("#chatmain");
@@ -212,12 +217,12 @@
 
                 <div class="opponents">
                     <div class="opponent">
-                        <img class="opponents-dot" src="/img/blackdot.png"/>
+                        <img class="opponents-dot" id="myStone"/>
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
                     <div class="opponent">
-                        <img class="opponents-dot" src="/img/whitedot.png"/>
+                        <img class="opponents-dot" id="enemyStone"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="enemy"></div>
                     </div>
