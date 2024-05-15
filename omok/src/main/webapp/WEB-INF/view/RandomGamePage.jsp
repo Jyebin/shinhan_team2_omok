@@ -97,6 +97,13 @@
                     enemyStone.style.zIndex = '6';
 
                     go.appendChild(enemyStone);
+
+                    // 이김 여부 판별
+                    if (obj.state == "win") {
+                        // 이겼을 때 로직
+                    } else if (obj.state == "lose") {
+                        // 졌을 때 로직
+                    }
                 } else if (obj.event == 'naming') { // 상대방 이름 설정
                     const enemyName = obj.enemyName;
                     document.getElementById("enemy").append(enemyName);
@@ -162,10 +169,13 @@
 
                     // 바둑판에 요소 추가해서 돌 놓기
                     go.appendChild(myStone);
+                    // 이 부분 겹쳐서 함수로 쓰고 싶은데 어떻게 할 지 모르겠움 ㅠ,ㅠ
+
                     // 소켓으로 x, y 좌표 보내주기
                     var message = {
                         x: returnX,
                         y: returnY,
+                        state: 'continue',
                         event: 'omok'
                     };
                     webSocket.send(JSON.stringify(message));
