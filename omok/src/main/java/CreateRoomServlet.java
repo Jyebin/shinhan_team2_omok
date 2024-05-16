@@ -1,4 +1,5 @@
 import DAO.GameDAO;
+import DAO.WinLoseDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,5 +56,27 @@ public class CreateRoomServlet extends HttpServlet {
             roomCode.append(range.charAt(rand));
         }
         return roomCode;
+    }
+
+    @WebServlet(name = "winLoseServlet", value = "/winLose")
+    public static class WinLoseServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            HttpSession session = request.getSession();
+            String loginUser = (String) session.getAttribute("name");
+            System.out.println("로그인한 이긴 유저 : " + loginUser);
+            WinLoseDAO winLoseDAO = new WinLoseDAO();
+            winLoseDAO.updateWinCnt(loginUser);
+            doHandle(request, response);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            doHandle(request, response);
+        }
+
+        protected void doHandle(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+            res.setContentType("text/html; charset=utf-8");
+        }
     }
 }
