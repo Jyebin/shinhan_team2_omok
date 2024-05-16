@@ -196,6 +196,26 @@
             })
         });
     </script>
+
+    <script>
+        function change(){
+            alert('비공개 방으로 전환합니다.');
+
+            const form = document.createElement('form'); // form 제출용 form 객체 생성
+            form.setAttribute('method' , 'get');
+            form.setAttribute('action' , '${pageContext.request.contextPath}/createRoom');
+            const data = document.createElement('input');
+
+            data.setAttribute('name' , 'type');
+            data.setAttribute('type', 'hidden');
+            data.setAttribute('value','비공개');
+
+            form.appendChild(data);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
 </head>
 
 <body class="body">
@@ -225,6 +245,12 @@
                         <img class="opponents-dot" id="enemyStone"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="enemy"></div>
+                    </div>
+                    <div class="randomBox">
+                        <div class="randomBox-title">참여자 대기중</div>
+                        <div class="randomBox-button">
+                            <input type="submit" onclick="change()" class="randomBox-buttons-convert" value="비공개방 전환"/>
+                        </div>
                     </div>
                 </div>
 

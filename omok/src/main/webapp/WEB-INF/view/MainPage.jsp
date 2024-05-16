@@ -107,7 +107,7 @@
             </aside>
             <section class="body-container-right">
                 <div class="fiveomoknuni-container">
-                    <img src="/img/fiveomoknuni.png">
+                    <img src="/img/fiveomoknuni.png" class="fiveomoknuni">
                 </div>
                 <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
 
@@ -131,9 +131,12 @@
         <div class="modal-header">
             <input class="exit" id="exitBtn" type="button" value="X">
         </div>
-        <input class="modal-long-button" id="logout" type="button" value="로그아웃">
-        <input id="pwd" type="password" placeholder="pwd 입력">
-        <input id="withdraw" type="button" value="회원탈퇴">
+        <input id="logout" type="button" value="로그아웃">
+        <form class="formClass" action="${pageContext.request.contextPath}/register" method="post">
+            <input name="pwd" id="pwd" type="password" placeholder="pwd 입력">
+            <input name="cmd" type="hidden" value="delmember" >
+            <input id="withdraw" type="submit" value="회원탈퇴">
+        </form>
     </div>
     <div class="modal" id="select">
         <div class="modal-header">
@@ -143,7 +146,6 @@
             <input class="modal-long-button" id="public" name="type" type="submit" value="공개">
             <input class="modal-long-button" id="private" name="type" type="submit" value="비공개">
         </form>
-
     </div>
 </main>
 </body>
