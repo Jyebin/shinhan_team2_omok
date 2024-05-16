@@ -21,6 +21,7 @@
 
         var webSocket;
         window.onload = function () {
+            $(".opponent2").hide();
             webSocket = new WebSocket("ws:/localhost:9090/"+room+"/"+type);
             let msgbutton = document.querySelector("#msgbutton");
             let msgtext = document.querySelector("#msgtext");
@@ -53,7 +54,7 @@
                 } else if (obj.event == 'naming') {
                     const enemyName = obj.enemyName;
                     $('#codeBox').hide();
-                    $('#opponentEnter').show();
+                    $('.opponent2').show();
                     document.getElementById("customEnemy").append(enemyName);
                 }
             };
@@ -136,20 +137,19 @@
             alert('방 코드가 복사되었습니다.');
         }
 
-        function change(){
-            alert('공개 방으로 전환합니다.');
-
-            const form = document.createElement('form'); // form 제출용 form 객체 생성
-            form.setAttribute('method' , 'get');
-            form.setAttribute('action' , '${pageContext.request.contextPath}/createRoom');
-            const data = document.createElement('input');
-            data.setAttribute('name' , 'type');
-            data.setAttribute('type', 'hidden');
-            data.setAttribute('value','공개');
-            form.appendChild(data);
-
-            document.body.appendChild(form);
-            form.submit();
+        function change() {
+            const roomCode = document.getElementById('roomCode2').innerText;
+            const xml = new XMLHttpRequest(); //XMLHttpRequest 객체 생성(서버 통신을 위함)
+            xml.open('POST', '/custom-game'); //서버로 요청을 보냄
+            xml.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            const requestBody = "roomCode="+encodeURIComponent(roomCode); //요청 본문에 roomCode 값 추가
+            xml.onreadystatechange = function () { //서버로부터 응답이 도착할 때마다 호출
+                if (xml.readyState === XMLHttpRequest.DONE) { //서버와의 통신이 완료되면
+                    alert('공개 방으로 전환합니다.');
+                    window.location.href = '/random-game';
+                }
+            };
+            xml.send(requestBody);
         }
 
     </script>
@@ -176,7 +176,7 @@
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
-                    <div class="opponent opponent2" id="opponentEnter">
+                    <div class="opponent opponent2">
                         <img class="opponents-dot" src="/img/whitedot.png"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="customEnemy"></div>

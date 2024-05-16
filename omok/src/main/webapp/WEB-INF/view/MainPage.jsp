@@ -109,7 +109,9 @@
                 <div class="fiveomoknuni-container">
                     <img src="/img/fiveomoknuni.png" class="fiveomoknuni">
                 </div>
-                <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
+                <form action="/createRoom" method="get">
+                    <input type="button" class="makeRoom" id="makeRoom" value="방 생성하기">
+                </form>
 
                 <form action="${pageContext.request.contextPath}/enterRoom" method="get">
                     <input type="submit" class="speedEnter" id="speedEnter" value="빠른 입장" name="roomType">
