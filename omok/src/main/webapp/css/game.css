@@ -1,0 +1,442 @@
+.body-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.body-container-left {
+    height: 100%;
+    flex-basis: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-container-left img {
+    width: 700px;
+    height: 700px;
+    border-radius: 15px 15px 15px 15px;
+
+}
+
+#go{
+    height: 700px;
+    width: 700px;
+    position: relative;
+    display:block;
+    content: '';
+    clear: both;
+}
+
+#checkerboard-img {
+    position: absolute;
+    border-radius: 15px 15px 15px 15px;
+    z-index: 2;
+    border: 6px solid #B75D35;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+
+
+.body-container-right {
+    height: 100%;
+    flex-basis: 400px;
+    position: relative;
+}
+
+#clock{
+    margin: 0 !important;
+    margin-top:25px !important;
+    margin-bottom: 25px !important;
+    border : 10px solid #f3f3f3 !important;
+    padding: 0 !important;
+    border-radius: 15px 15px 15px 15px;
+}
+
+#clock .display {
+    padding: 20px 20px !important;
+}
+
+
+
+.opponents{
+    display: flex;
+    flex-direction: row;
+}
+
+.opponent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.opponents-img{
+    width: 200px;
+}
+
+.opponents-dot{
+    width: 60px;
+}
+
+.opponents-id{
+    width: 150px;
+    height: 50px;
+    font-size: 24px;
+    letter-spacing: -2px;
+    background-color: #F5C266;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0px 0px 5px 0px black;
+    position: relative;
+}
+.me{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+}
+
+.codeBox {
+    margin-top: 50px;
+}
+
+.randomBox {
+    margin-top: 75px;
+}
+
+.codeBox-title{
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: white;
+    border-top: 5px solid #C0B8AB;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-radius: 30px 30px 0 0;
+    font-size: 20px;
+}
+
+.codeBox-code{
+    background: #F3F1EA;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: -2px;
+    color: black;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+
+}
+
+
+.codeBox-buttons{
+    background: #e6e1db;
+    width: 200px;
+    height: 150px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: -2px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-bottom: 5px solid #C0B8AB;
+    border-radius: 0 0 30px 30px;
+
+}
+
+.codeBox-buttons-copy{
+    border: none;
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 160px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -2px;
+
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 2px 0px black;
+}
+
+
+.codeBox-buttons-convert{
+    border: none;
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 160px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 2px 0px black;
+}
+
+
+.randomBox{
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+
+.randomBox-title{
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 180px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: white;
+    border-top: 5px solid #C0B8AB;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-radius: 30px 30px 0 0;
+    font-size: 20px;
+    letter-spacing: -2px;
+}
+
+
+.randomBox{
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.randomBox-button{
+    background: #e6e1db;
+    width: 180px;
+    height: 130px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-left: 5px solid #C0B8AB;
+    border-right: 5px solid #C0B8AB;
+    border-bottom: 5px solid #C0B8AB;
+    border-radius: 0 0 30px 30px;
+}
+
+
+
+.randomBox-buttons-convert{
+    border: none;
+    background: linear-gradient(#FFD281 , #F17633);
+    width: 150px;
+    height: 40px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 2px 0px black;
+
+}
+
+
+
+.chat{
+    display: flex;
+    flex-direction: column;
+
+}
+.chatheader{
+    margin-top: 20px;
+    width: 400px;
+    height: 30px;
+    background-color:   #F48741;
+    border-radius: 30px 30px 0px 0px;
+}
+
+.chatmain{
+    overflow-y: scroll;
+    width: 400px;
+    height: 250px;
+    background-color: white;
+
+}
+
+.chatmain::-webkit-scrollbar {
+    width: 10px;
+}
+
+.chatmain::-webkit-scrollbar-thumb {
+    background: #aaaaaa; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.chatmain::-webkit-scrollbar-track {
+    background: rgba(225, 225, 225 , 0.1);  /*스크롤바 뒷 배경 색상*/
+}
+
+
+
+
+
+.chatfooter{
+    background-color: white;
+    height: 70px;
+    width: 400px;
+    border-radius:  0px 0px 30px 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatfooter-inner{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #D9D9D9;
+    height: 50px;
+    width: 350px;
+    margin-bottom: 20px;
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+.chatfooter-inner input[type="text"]{
+    width: 280px;
+    background-color: transparent;
+    border: none;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    border-radius: 10px 10px 10px 10px;
+    outline: none;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.chatfooter-inner input[type="button"]{
+    height: 40px;
+    width: 60px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #F48741;
+    border: none;
+    color: white;
+    font-size: 20px;
+
+}
+
+
+
+.chatmain-left{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 10px;
+    background-color: #F3EEC0;
+    width: auto;
+    height: auto;
+    border-radius: 10px 10px 10px 10px;
+
+}
+.chatmain-left-container{text-align: left;}
+
+/* 바둑판 css */
+
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+#checkerboard-back{
+    position: absolute;
+    z-index: 1;
+}
+
+#checkerboard {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    z-index: 2;
+}
+
+.square {
+    border: thin solid saddlebrown;
+    padding: 0;
+}
+
+
+
+
+.chatmain-right-container{
+    text-align: right;
+}
+.chatmain-right{
+    text-align: right;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 10px;
+    background-color: #EEDBD8;
+    /* width: auto; */
+    /* height: auto; */
+    border-radius: 10px 10px 10px 10px;
+
+
+}
+
+
+.exit-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+}
+
+
+.body-container-right .exit {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(#FF8847 , #FFDD65);
+    border:4px solid white;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0px 0px 5px 0px black;
+}

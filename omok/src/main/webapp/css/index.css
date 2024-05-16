@@ -1,0 +1,107 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+
+/*login-item1*/
+.login-item1{
+    border-radius: 30px 30px 30px 30px;
+    width: 800px;
+    height: 300px;
+    background : url("/img/cutted_background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/*login-item2*/
+.login-item2{
+    width: 500px;
+    height: 200px;
+    
+}
+
+.login-item2-container{
+    margin-top: 40px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+    
+
+
+.login-item2-container  .login-item2-div{
+    margin-top: 10px;
+    width: 70px;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #B75D35;
+}
+
+.login-item2-container  .login-item2-input{
+    width: 350px;
+    height: 45px;
+    border-radius: 15px 15px 15px 15px;
+    border: 5px solid #B75D35;
+
+    font-size: large;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*login-item3*/
+
+.login-item3{
+    display: flex;
+    flex-direction: row;
+}
+
+.login-item3 input{
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.login-item3 input[type='button']{
+    margin : 40px;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #B75D35;
+    border: none;
+    font-size: 30px;
+    color: white;
+}
+
+.login-item3 input[type='submit']{
+    margin : 40px;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #B75D35;
+    border: none;
+    font-size: 30px;
+    color: white;
+}
+
+form{
+    height: 100%;
+}
