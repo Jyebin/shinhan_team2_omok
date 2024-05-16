@@ -44,6 +44,9 @@ public class MainPageDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        while (list.size() < 5) {
+            list.add(""); // 빈 문자열 추가로 에러 방지
+        }
         return list;
     }
 
