@@ -18,8 +18,7 @@
     <script> // 변수 초기화
     var room = "<%= session.getAttribute("room")%>";
     var type = "<%= session.getAttribute("type")%>";
-    var name = "<%= session.getAttribute("name")%>";
-
+    var name = "<%= session.getAttribute("name")%>"
 
     var webSocket;
 
@@ -39,6 +38,7 @@
     </script>
     <script>
         window.onload = function () {
+            $(".opponent2").hide();
             webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
 
             // 캐릭터 머리 위 바둑알 색 설정
@@ -112,6 +112,8 @@
                         // 졌을 때 로직
                     }
                 } else if (obj.event == 'naming') { // 상대방 이름 설정
+                    $(".randomBox").hide();
+                    $(".opponent2").show();
                     const enemyName = obj.enemyName;
                     document.getElementById("enemy").append(enemyName);
                 } else if (obj.event == "state") { // win, lose 판별
@@ -245,7 +247,7 @@
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
-                    <div class="opponent">
+                    <div class="opponent opponent2">
                         <img class="opponents-dot" id="enemyStone"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="enemy"></div>
@@ -253,7 +255,7 @@
                     <div class="randomBox">
                         <div class="randomBox-title">참여자 대기중</div>
                         <div class="randomBox-button">
-                            <input type="submit" onclick="change()" class="randomBox-buttons-convert" value="비공개방 전환"/>
+                            <input type="submit" onclick="change()" class="randomBox-buttons-convert" id="randomBoxBtn" value="비공개방 전환"/>
                         </div>
                     </div>
                 </div>

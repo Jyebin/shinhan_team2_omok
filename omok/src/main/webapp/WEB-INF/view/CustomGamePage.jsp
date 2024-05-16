@@ -21,6 +21,7 @@
 
         var webSocket;
         window.onload = function () {
+            $(".opponent2").hide();
             webSocket = new WebSocket("ws:/localhost:9090/"+room+"/"+type);
             let msgbutton = document.querySelector("#msgbutton");
             let msgtext = document.querySelector("#msgtext");
@@ -53,7 +54,7 @@
                 } else if (obj.event == 'naming') {
                     const enemyName = obj.enemyName;
                     $('#codeBox').hide();
-                    $('#opponentEnter').show();
+                    $('.opponent2').show();
                     document.getElementById("customEnemy").append(enemyName);
                 }
             };
@@ -145,7 +146,7 @@
             xml.onreadystatechange = function () { //서버로부터 응답이 도착할 때마다 호출
                 if (xml.readyState === XMLHttpRequest.DONE) { //서버와의 통신이 완료되면
                     alert('공개 방으로 전환합니다.');
-                    window.location.href = '/random';
+                    window.location.href = '/random-game';
                 }
             };
             xml.send(requestBody);
@@ -175,7 +176,7 @@
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
-                    <div class="opponent opponent2" id="opponentEnter">
+                    <div class="opponent opponent2">
                         <img class="opponents-dot" src="/img/whitedot.png"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="customEnemy"></div>
