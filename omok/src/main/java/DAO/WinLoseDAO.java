@@ -28,7 +28,7 @@ public class WinLoseDAO {
         ResultSet resultSet = null;
         try {
             con = dataSource.getConnection();
-            String query = "update GameList set user_win_cnt = user_win_cnt + 1 where game_name = ?";
+            String query = "update user set user_win_cnt = user_win_cnt + 1 where user_name = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, loginUser);
             pstmt.executeUpdate();

@@ -229,6 +229,13 @@
 
 
         window.onload = function () {
+            document.querySelector(".lose-modal-exit").addEventListener("click" , function (){
+                window.location.replace("/main");
+            });
+            document.querySelector(".win-modal-exit").addEventListener("click" , function (){
+                window.location.replace("/main");
+            });
+
             webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
             $(".opponent2").hide();
 
@@ -271,8 +278,19 @@
                     $(".opponent2").show();
                     update_time3();
                 } else if (obj.event == 'state') {
+                    //여기서 구현
+                    if (obj.win == myStoneColor) { //내가 블랙이고 내가 이겼으면
+                        const xhr = new XMLHttpRequest(); //XMLHttpRequest 객체 생성
+                        xhr.open("GET", "/winLose"); //HTTP Method, URL 정의
+                        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8"); //헤더값 중 content-type 정의
+
+                        xhr.send()
+
+                        document.querySelector(".win-modal").style.display = 'block';
+                    } else {
+                        document.querySelector(".lose-modal").style.display ='block';
+                    }
                     webSocket.close();
-                    window.location.replace("/main");
                 }
             };
 
@@ -348,6 +366,22 @@
 </head>
 
 <body class="body">
+<div class="win-modal">
+    <div class="win-modal-container">
+        <h2 class="win-modal-title">YOU WIN!!!</h2>
+        <input class="win-modal-exit" type="button" value="나가기">
+        <img class="win-modal-img1" src="/img/firework.png" width="200" height="200" />
+        <img class="win-modal-img2" src="/img/firework.png" width="200" height="200" />
+        <img class="win-modal-img3" src="/img/firework.png" width="200" height="200" />
+        <img class="win-modal-img4" src="/img/firework.png" width="200" height="200" />
+    </div>
+</div>
+<div class="lose-modal">
+    <div class="lose-modal-container">
+        <h2 class="lose-modal-title">YOU LOSE...</h2>
+        <input class="lose-modal-exit" type="button" value="나가기">
+    </div>
+</div>
 <main class="main">
     <section class="body-item">
         <section class="body-container">
