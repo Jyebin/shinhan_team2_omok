@@ -9,33 +9,33 @@
     <title>오목눈이</title>
 
     <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/common.css"/>
-    <link rel="stylesheet" href="/css/game.css"/>
+    <link rel="stylesheet" href="/css/common.css?after"/>
+    <link rel="stylesheet" href="/css/game.css?after"/>
     <link rel="stylesheet" href="/css/clock.css?after"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
     <script> // 변수 초기화
-        var room = "<%= session.getAttribute("room")%>";
-        var type = "<%= session.getAttribute("type")%>";
-        var name = "<%= session.getAttribute("name")%>";
+    var room = "<%= session.getAttribute("room")%>";
+    var type = "<%= session.getAttribute("type")%>";
+    var name = "<%= session.getAttribute("name")%>";
 
 
-        var webSocket;
+    var webSocket;
 
-        var currentUser;
-        var myStoneColor, enemyStoneColor;
+    var currentUser;
+    var myStoneColor, enemyStoneColor;
 
-        if (type == "create") {
-            currentUser = "O";
-            myStoneColor = "black";
-            enemyStoneColor = "white";
-        }
-        else {
-            currentUser = "X";
-            myStoneColor = "white";
-            enemyStoneColor = "black";
-        }
+    if (type == "create") {
+        currentUser = "O";
+        myStoneColor = "black";
+        enemyStoneColor = "white";
+    }
+    else {
+        currentUser = "X";
+        myStoneColor = "white";
+        enemyStoneColor = "black";
+    }
     </script>
     <script>
         window.onload = function () {
@@ -114,6 +114,11 @@
                 } else if (obj.event == 'naming') { // 상대방 이름 설정
                     const enemyName = obj.enemyName;
                     document.getElementById("enemy").append(enemyName);
+                } else if (obj.event == "state") { // win, lose 판별
+                    console.log("게임 끝");
+                    webSocket.close();
+                    // win, lose 띄우기
+                    window.location.replace("/main");
                 }
             };
 
@@ -182,7 +187,6 @@
                     var message = {
                         x: returnX,
                         y: returnY,
-                        state: 'continue',
                         event: 'omok'
                     };
                     webSocket.send(JSON.stringify(message));
@@ -192,9 +196,29 @@
 
             var exit = document.getElementById("exit");
             exit.addEventListener('click', function (event) {
-              webSocket.close();
+                webSocket.close();
             })
         });
+    </script>
+
+    <script>
+        function change(){
+            alert('비공개 방으로 전환합니다.');
+
+            const form = document.createElement('form'); // form 제출용 form 객체 생성
+            form.setAttribute('method' , 'get');
+            form.setAttribute('action' , '${pageContext.request.contextPath}/createRoom');
+            const data = document.createElement('input');
+
+            data.setAttribute('name' , 'type');
+            data.setAttribute('type', 'hidden');
+            data.setAttribute('value','비공개');
+
+            form.appendChild(data);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
 </head>
 
@@ -225,6 +249,12 @@
                         <img class="opponents-dot" id="enemyStone"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="enemy"></div>
+                    </div>
+                    <div class="randomBox">
+                        <div class="randomBox-title">참여자 대기중</div>
+                        <div class="randomBox-button">
+                            <input type="submit" onclick="change()" class="randomBox-buttons-convert" value="비공개방 전환"/>
+                        </div>
                     </div>
                 </div>
 

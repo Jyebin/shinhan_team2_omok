@@ -15,8 +15,8 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocket {
     // gameRoom = 게임 방, gameBoard = 게임 방에 맞는 보드
     // 둘 다 key를 room으로 가짐
-     private static Map<String, List<Session>> gameRoom = new LinkedHashMap<>();
-     private static Map<String, GoBoard> gameBoard = new HashMap<>();
+    private static Map<String, List<Session>> gameRoom = new LinkedHashMap<>();
+    private static Map<String, GoBoard> gameBoard = new HashMap<>();
 
     @OnOpen
     public void handleOpen(Session session, @PathParam("room") String room, @PathParam("type") String type) throws IOException {
@@ -69,16 +69,24 @@ public class WebSocket {
             int x = jsonObject.getInt("x");
             int y = jsonObject.getInt("y");
             GoBoard board = gameBoard.get(room);
-            processOmok(x, y, board, recieveSession);
+            processOmok(x, y, board, recieveSession, type);
         }
     }
 
-    private void processOmok(int x, int y, GoBoard board, Session session) {
+    private void processOmok(int x, int y, GoBoard board, Session session, String type) {
         broadCastOmokMove(x, y, session); // 좌표 전달
+        System.out.println(x + " " + y);
         if (board.check(x, y, session)) {
             // 승패가 갈렸는지 여부 체크
             // 갈렸으면 -> winner에게 win 담긴 msg 전달, loser에게 lose 담긴 msg 전달
 
+            JSONObject stateJson = new JSONObject();
+            stateJson.put("event", "state");
+            stateJson.put("win", board.getWinner());
+            stateJson.put("lose", board.getLoser());
+
+            board.getBlack().getAsyncRemote().sendText(stateJson.toString());
+            board.getWhite().getAsyncRemote().sendText(stateJson.toString());
         }
     }
 
@@ -104,11 +112,13 @@ public class WebSocket {
         gameBoard.remove(room);
         gameRoom.remove(room);
         session.close();
+        System.out.println("여기도되나");
     }
 
     // WebSocket과 브라우저 간에 통신 에러가 발생하면 요청되는 함수.
     @OnError
     public void handleError(Throwable t) {
+        System.out.println("HandleError 호출");
         t.printStackTrace();
     }
 }
