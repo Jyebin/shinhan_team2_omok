@@ -1,6 +1,4 @@
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.*;
@@ -15,89 +13,97 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/{room}/{type}")
 public class WebSocket {
-    // 대기 방, 꽉찬 방 리스트
-     private static Map<String, List<Session>> waitingRoom = new LinkedHashMap<>();
-     private static Map<String, List<Session>> fullRoom = new LinkedHashMap<>();
+    // gameRoom = 게임 방, gameBoard = 게임 방에 맞는 보드
+    // 둘 다 key를 room으로 가짐
+     private static Map<String, List<Session>> gameRoom = new LinkedHashMap<>();
+     private static Map<String, GoBoard> gameBoard = new HashMap<>();
 
-    // WebSocket으로 브라우저가 접속하면 요청되는 함수
     @OnOpen
-    public void handleOpen(Session sess, @PathParam("room") String room, @PathParam("type") String type) throws IOException {
-        System.out.println("socket loading");
-        System.out.println("type : " + type);
+    public void handleOpen(Session session, @PathParam("room") String room, @PathParam("type") String type) throws IOException {
         if ("create".equals(type)) {
             // 방 생성 로직
             List<Session> newRoom = new ArrayList<>();
-            newRoom.add(sess);
-            waitingRoom.put(room, newRoom);
+            newRoom.add(session);
+
+            GoBoard board = new GoBoard();
+            board.setBlack(session);
+
+            gameRoom.put(room, newRoom);
+            gameBoard.put(room, board);
         } else if ("enter".equals(type)) {
             // 방 입장 로직
-            List<Session> findRoom = waitingRoom.get(room);
-            if (findRoom == null) { // 방이 없을 경우
-                System.out.println("create- "+waitingRoom.size() + " 개 존재");
-                sess.getAsyncRemote().sendText("방이 존재하지 않습니다.");
-                sess.close();
-            }
-            System.out.println("enter room: "+room);
-            System.out.println("waitingRoom: "+waitingRoom);
-            System.out.println("waitingRoomSize: "+waitingRoom.size());
-            waitingRoom.get(room).add(sess); // 기존 방 session list에 새로 입장한 사람 session 넣고
-
-            fullRoom.put(room, waitingRoom.get(room)); // room, arraylist 그대로 fullRoom에 삽입
-            waitingRoom.remove(room); // 기존 대기방에서 삭제
+            gameBoard.get(room).setWhite(session);
+            gameRoom.get(room).add(session); // 기존 방 session list에 새로 입장한 사람 session 넣고
         }
-        System.out.println("clear");
     }
 
-    // WebSocket으로 메시지가 오면 요청되는 메서드
     @OnMessage
-    public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException, ParseException {
-        System.out.println(room);
-        System.out.println(message);
-        System.out.println(type);
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)parser.parse(message);
-        System.out.println("jsonObject.get(\"event\") : "+jsonObject.get("event"));
+    public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
+        JSONObject jsonObject = new JSONObject(message);
+        JSONObject data = new JSONObject();
         if(jsonObject.get("event").equals("chat")){
-            if (this.fullRoom.get(room)==null){
-                JSONObject data = new JSONObject();
+            for(int i = 0; i < gameRoom.get(room).size(); ++i) {
+                Session waitingSession = gameRoom.get(room).get(i);
                 data.put("room", room);
                 data.put("type", type);
-                data.put("message", jsonObject.get("message"));
+                data.put("message", jsonObject.getString("message"));
                 data.put("event" , "chat");
-                recieveSession.getBasicRemote().sendText(data.toString());
-            } else {
-                for(int i = 0; i < this.fullRoom.get(room).size(); ++i) {
-                    Session waitingSession = this.fullRoom.get(room).get(i);
-                    JSONObject data = new JSONObject();
-                    data.put("room", room);
-                    data.put("type", type);
-                    data.put("message", jsonObject.get("message"));
-                    data.put("event" , "chat");
-                    waitingSession.getBasicRemote().sendText(data.toString());
-                }
-            }
+                waitingSession.getBasicRemote().sendText(data.toString());
+            } // gameRoom.get(room)이 비어있을 수 없기 때문에, 예외 삭제
         } // chat 이벤트 끝
-        else if ("naming".equals(jsonObject.get("event"))) {
+        else if ("naming".equals(jsonObject.getString("event"))) {
             // 이름 주고받는 이벤트 시작
-            while (fullRoom.get(room) == null) {
+            while (gameRoom.get(room).size() < 2) {
                 // 무한 루프, room 번호로 fullRoom이 생기면 탈출
             }
             int sessionIndex = 0;
-            JSONObject data = new JSONObject();
-            data.put("enemyName", jsonObject.get("enemyName"));
+            data.put("enemyName", jsonObject.getString("enemyName"));
             data.put("event", "naming");
-            if (recieveSession == fullRoom.get(room).get(0)) {
+            if (recieveSession == gameRoom.get(room).get(0)) {
                 sessionIndex = 1;
             }
-            Session waitingSession = fullRoom.get(room).get(sessionIndex);
+            Session waitingSession = gameRoom.get(room).get(sessionIndex);
             waitingSession.getAsyncRemote().sendText(data.toString());
+        }
+        else if ("omok".equals(jsonObject.getString("event"))) {
+            int x = jsonObject.getInt("x");
+            int y = jsonObject.getInt("y");
+            GoBoard board = gameBoard.get(room);
+            processOmok(x, y, board, recieveSession);
+        }
+    }
+
+    private void processOmok(int x, int y, GoBoard board, Session session) {
+        broadCastOmokMove(x, y, session); // 좌표 전달
+        if (board.check(x, y, session)) {
+            // 승패가 갈렸는지 여부 체크
+            // 갈렸으면 -> winner에게 win 담긴 msg 전달, loser에게 lose 담긴 msg 전달
+
+        }
+    }
+
+    private void broadCastOmokMove(int x, int y, Session session) {
+        // 현재 방에 있는 모든 클라이언트에게 오목 돌 놓기 이벤트 메시지 전송
+        for (List<Session> sessions : gameRoom.values()) {
+            for (Session s : sessions) {
+                if (!s.equals(session)) { // 다른 클라이언트에게 전송
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("event", "omok");
+                    jsonObject.put("x", x);
+                    jsonObject.put("y", y);
+                    s.getAsyncRemote().sendText(jsonObject.toString());
+                }
+            }
         }
     }
 
     // WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
     @OnClose
-    public void handleClose() {
-        System.out.println("client is now disconnected...");
+    public void handleClose(@PathParam("room") String room, Session session) throws IOException {
+        System.out.println("게임 나가기! 소켓 연결 종료");
+        gameBoard.remove(room);
+        gameRoom.remove(room);
+        session.close();
     }
 
     // WebSocket과 브라우저 간에 통신 에러가 발생하면 요청되는 함수.

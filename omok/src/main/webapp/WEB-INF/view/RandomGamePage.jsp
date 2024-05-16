@@ -15,19 +15,41 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script src="/clock.js"></script>
-    <script>
+    <script> // 변수 초기화
         var room = "<%= session.getAttribute("room")%>";
         var type = "<%= session.getAttribute("type")%>";
-        var name = "<%= session.getAttribute("name")%>"
+        var name = "<%= session.getAttribute("name")%>";
+
 
         var webSocket;
+
+        var currentUser;
+        var myStoneColor, enemyStoneColor;
+
+        if (type == "create") {
+            currentUser = "O";
+            myStoneColor = "black";
+            enemyStoneColor = "white";
+        }
+        else {
+            currentUser = "X";
+            myStoneColor = "white";
+            enemyStoneColor = "black";
+        }
+    </script>
+    <script>
         window.onload = function () {
             webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
+
+            // 캐릭터 머리 위 바둑알 색 설정
+            document.querySelector("#myStone").src = '/img/'+myStoneColor+'dot.png';
+            document.querySelector("#enemyStone").src = '/img/'+enemyStoneColor+'dot.png';
+
             let msgbutton = document.querySelector("#msgbutton");
             let msgtext = document.querySelector("#msgtext");
             let chatmain = document.querySelector("#chatmain");
 
-            webSocket.onopen = function (e) {
+            webSocket.onopen = function (e) { // websocket 서버가 열리면 실행 되는 함수
                 chatmain.insertAdjacentHTML('beforeend', "<div class='chatmain-right-container'><div class='chatmain-right'>" + "방에 입장 하였습니다." + "</div></div>");
 
                 const namingData = {
@@ -37,10 +59,9 @@
                 webSocket.send(JSON.stringify(namingData));
             };
 
-            // WebSocket 서버로 부터 메시지가 오면 호출되는 함수
-            webSocket.onmessage = function (e) {
-                let obj = JSON.parse(e.data);
-                if (obj.event == "chat") {
+            webSocket.onmessage = function (e) { // WebSocket 서버로 부터 메시지가 오면 호출되는 함수
+                let obj = JSON.parse(e.data); // 받은 데이터 파싱
+                if (obj.event == "chat") { // 채팅
                     if (obj.type == type) {
                         chatmain.insertAdjacentHTML('beforeend', "<div class='chatmain-right-container'><div class='chatmain-right'>" + obj.message + "</div></div>");
                     } else {
@@ -48,28 +69,64 @@
                     }
                     let scroll = document.querySelector("#chatmain");
                     scroll.scrollTop = scroll.scrollHeight;
+                } else if (obj.event == "omok") { // 오목 돌 두기
+                    currentUser = "O"; // 데이터를 받았으니 사용자로 턴 돌아옴
 
-                } else if (obj.event == "omok") {
-                    // 여기에 수정~~~
-                } else if (obj.event == 'naming') {
+                    var x2 = obj.x;
+                    var y2 = obj.y;
+
+                    if (x2 < 0 || y2 < 0 || y2 > 12 || x2 > 12) {
+                        return;
+                    }
+
+                    // 바둑알 이미지 가져오기
+                    const enemyStone = document.createElement('img');
+
+                    enemyStone.src = '/img/'+enemyStoneColor+'dot.png';
+                    enemyStone.className = 'stone';
+
+                    // 바둑알 위치 초기화 및 크기 지정
+                    enemyStone.style.left = '0px';
+                    enemyStone.style.right = '0px';
+                    enemyStone.style.width = '53px';
+                    enemyStone.style.height = '53px';
+
+                    var putX = x2 * 53 + 34;
+                    var putY = y2 * 53 + 34;
+                    // 클릭한 곳이 바둑알의 중심 좌표가 되게
+                    var stoneX = putX - (enemyStone.width / 2);
+                    var stoneY = putY - (enemyStone.height / 2);
+
+                    // css 속성으로 바둑알 위치 지정
+                    enemyStone.style.position = 'absolute';
+                    enemyStone.style.left = stoneX + 'px';
+                    enemyStone.style.top = stoneY + 'px';
+                    enemyStone.style.zIndex = '6';
+
+                    go.appendChild(enemyStone);
+
+                    // 이김 여부 판별
+                    if (obj.state == "win") {
+                        // 이겼을 때 로직
+                    } else if (obj.state == "lose") {
+                        // 졌을 때 로직
+                    }
+                } else if (obj.event == 'naming') { // 상대방 이름 설정
                     const enemyName = obj.enemyName;
-                    console.log(enemyName);
                     document.getElementById("enemy").append(enemyName);
                 }
             };
 
-            msgbutton.addEventListener('click', function () {
+            msgbutton.addEventListener('click', function () { // 전송 버튼 이벤트
                 let obj = {};
                 obj.message = msgtext.value;
                 obj.event = 'chat';
-                // let text = msgtext.value;
 
                 webSocket.send(JSON.stringify(obj));
                 document.querySelector("#msgtext").value = '';
             })
         };
     </script>
-
     <script>
         // 바둑알 놓기
         document.addEventListener('DOMContentLoaded', function () {
@@ -77,53 +134,66 @@
             const go = document.getElementById('go');
 
             board.addEventListener('click', function (event) {
-                // 이미지 내에서의 좌표를 구하기 위해 offset 사용
-                const rect = board.getBoundingClientRect();
-
-                // 클릭한 곳으로부터 가장 가까운 점에 바둑알 놓이게
-                var x = Math.round((Math.round(event.clientX - rect.left - 34) / 53)) * 53 + 34; // X 좌표
-                var y = Math.round((Math.round(event.clientY - rect.top - 34) / 53)) * 53 + 34;// Y 좌표
-
-                // 반환될 x, y 좌표 계산 (0~12범위)
-                var returnX = (x - 34) / 53;
-                var returnY = (y - 34) / 53;
-
-                // 콘솔에 칸위치로 계산된 좌표 표시
-                console.log(`X 좌표: ${returnX}, Y 좌표: ${returnY}`);
-                if (returnX < 0 || returnY < 0 || returnY > 12 || returnX > 12) {
-                    return;
+                if (currentUser == 'X') {
+                    alert("순서가 아닙니다.");
                 }
+                else {
+                    // 이미지 내에서의 좌표를 구하기 위해 offset 사용
+                    const rect = board.getBoundingClientRect();
 
-                // 검은 바둑알 이미지 가져오기
-                const blackStone = document.createElement('img');
-                blackStone.src = '/img/blackdot.png';
-                blackStone.className = 'stone';
+                    // 클릭한 곳으로부터 가장 가까운 점에 바둑알 놓이게
+                    var x = Math.round((Math.round(event.clientX - rect.left - 34) / 53)) * 53 + 34; // X 좌표
+                    var y = Math.round((Math.round(event.clientY - rect.top - 34) / 53)) * 53 + 34;// Y 좌표
 
-                // 바둑알 위치 초기화 및 크기 지정
-                blackStone.style.left = '0px';
-                blackStone.style.right = '0px';
-                blackStone.style.width = '53px';
-                blackStone.style.height = '53px';
+                    // 반환될 x, y 좌표 계산 (0~12범위)
+                    var returnX = (x - 34) / 53;
+                    var returnY = (y - 34) / 53;
 
-                // 클릭한 곳이 바둑알의 중심 좌표가 되게
-                var stoneX = x - (blackStone.width / 2);
-                var stoneY = y - (blackStone.height / 2);
+                    if (returnX < 0 || returnY < 0 || returnY > 12 || returnX > 12) {
+                        return;
+                    }
 
-                // css 속성으로 바둑알 위치 지정
-                blackStone.style.position = 'absolute';
-                blackStone.style.left = stoneX + 'px';
-                blackStone.style.top = stoneY + 'px';
-                blackStone.style.zIndex = '6';
+                    // 해당 바둑알 이미지 가져오기
+                    const myStone = document.createElement('img');
+                    myStone.src = '/img/'+myStoneColor+'dot.png';
+                    myStone.className = 'stone';
 
-                // 놓인 곳에 바둑알 다시 못 놓게 << 적용 안 됨 수정해야 함
-                blackStone.style.userSelect = 'none';
-                blackStone.style.pointerEvents = 'none';
+                    // 바둑알 위치 초기화 및 크기 지정
+                    myStone.style.left = '0px';
+                    myStone.style.right = '0px';
+                    myStone.style.width = '53px';
+                    myStone.style.height = '53px';
 
-                // 바둑판에 요소 추가해서 돌 놓기
-                go.appendChild(blackStone);
+                    // 클릭한 곳이 바둑알의 중심 좌표가 되게
+                    var stoneX = x - (myStone.width / 2);
+                    var stoneY = y - (myStone.height / 2);
 
-                // 소켓으로 x, y 좌표 보내주기
+                    // css 속성으로 바둑알 위치 지정
+                    myStone.style.position = 'absolute';
+                    myStone.style.left = stoneX + 'px';
+                    myStone.style.top = stoneY + 'px';
+                    myStone.style.zIndex = '6';
+
+                    // 바둑판에 요소 추가해서 돌 놓기
+                    go.appendChild(myStone);
+                    // 이 부분 겹쳐서 함수로 쓰고 싶은데 어떻게 할 지 모르겠움 ㅠ,ㅠ
+
+                    // 소켓으로 x, y 좌표 보내주기
+                    var message = {
+                        x: returnX,
+                        y: returnY,
+                        state: 'continue',
+                        event: 'omok'
+                    };
+                    webSocket.send(JSON.stringify(message));
+                    currentUser = "X";
+                }
             });
+
+            var exit = document.getElementById("exit");
+            exit.addEventListener('click', function (event) {
+              webSocket.close();
+            })
         });
     </script>
 
@@ -167,12 +237,12 @@
 
                 <div class="opponents">
                     <div class="opponent">
-                        <img class="opponents-dot" src="/img/blackdot.png"/>
+                        <img class="opponents-dot" id="myStone"/>
                         <img class="opponents-img" src="/img/right_character.png">
                         <div class="opponents-id"><img class="me" src="/img/mestar.png">${name}</div>
                     </div>
-                    <div class="opponent opponent2">
-                        <img class="opponents-dot" src="/img/whitedot.png"/>
+                    <div class="opponent">
+                        <img class="opponents-dot" id="enemyStone"/>
                         <img class="opponents-img" src="/img/left_character.png">
                         <div class="opponents-id" id="enemy"></div>
                     </div>
@@ -194,7 +264,10 @@
                     </div>
                 </div>
                 <div class="exit-container">
-                    <div class="exit">게임 나가기</div>
+                    <form action="/main" method="get">
+                        <input type="submit" class="exit" id="exit" value="게임 나가기"/>
+                    </form>
+
                 </div>
             </aside>
         </section>
