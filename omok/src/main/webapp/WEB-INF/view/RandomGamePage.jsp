@@ -54,6 +54,8 @@
         }
 
         function placeStone(x, y, stoneColor) {
+            const go = document.getElementById('go');
+
             // 바둑알 이미지 가져오기
             const stone = document.createElement('img');
             stone.src = '/img/' + stoneColor + 'dot.png';
