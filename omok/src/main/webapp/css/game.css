@@ -68,6 +68,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .opponent{
     display: flex;
     flex-direction: column;
@@ -219,6 +220,10 @@
 }
 
 
+.randomBox{
+    font-weight: 700;
+    letter-spacing: -2px;
+}
 
 .randomBox-button{
     background: #e6e1db;
@@ -236,7 +241,6 @@
     border-right: 5px solid #C0B8AB;
     border-bottom: 5px solid #C0B8AB;
     border-radius: 0 0 30px 30px;
-
 }
 
 

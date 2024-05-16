@@ -29,16 +29,25 @@ public class MainPageServlet extends HttpServlet {
 
         // 랭킹을 위해 멤버 정보 받아오기
         MainPageDAO dao = new MainPageDAO();
+
         // 상위 3명 정보 불러오기
         List<String> topRank = dao.getTopRank();
+
+        // 상위 3명 정보 불러오기, 데이터가 부족할 경우 빈 값을 사용
+        String firstMember = topRank.size() > 0 ? topRank.get(0) : "데이터 없음";
+        String secondMember = topRank.size() > 1 ? topRank.get(1) : "데이터 없음";
+        String thirdMember = topRank.size() > 2 ? topRank.get(2) : "데이터 없음";
+
         // 전체 멤버 정보 or 검색 멤버 정보 불러오기
         String name = req.getParameter(null);
         Map<String, Integer> allUserList = dao.getUserList(name);
+
         // attribute 설정
         req.setAttribute("userList", allUserList);
-        req.setAttribute("firstMember", topRank.get(0));
-        req.setAttribute("secondMember", topRank.get(1));
-        req.setAttribute("thirdMember", topRank.get(2));
+        req.setAttribute("firstMember", firstMember);
+        req.setAttribute("secondMember", secondMember);
+        req.setAttribute("thirdMember", thirdMember);
+
 
         // 유저 검색
         req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);

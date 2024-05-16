@@ -17,6 +17,12 @@ html{
     font-style: normal
 }
 
+.game *{
+    font-family: 'IBM Plex Sans KR';
+    font-weight: 400;
+    font-style: normal;
+}
+
 .body-item{
     background: url("/img/background.png");
     background-position: center;
