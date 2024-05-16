@@ -245,12 +245,6 @@
                     }
                     placeStone(x2, y2, enemyStoneColor);
 
-                    // 이김 여부 판별
-                    if (obj.state == "win") {
-                        // 이겼을 때 로직
-                    } else if (obj.state == "lose") {
-                        // 졌을 때 로직
-                    }
                 } else if (obj.event == 'naming') { // 상대방 이름 설정
                     document.getElementById("enemy").append(obj.enemyName);
                     // 상대방 캐릭터 띄우고, 코드박스 사라지게
@@ -260,6 +254,7 @@
                     update_time3();
 
                 } else if (obj.event == 'state') {
+                    obj.winner
                     webSocket.close();
                     window.location.replace("/main");
                 }
