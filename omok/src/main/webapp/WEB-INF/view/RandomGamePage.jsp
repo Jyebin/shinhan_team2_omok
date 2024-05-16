@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/game.css"/>
     <link rel="stylesheet" href="/css/clock.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
     <script>
@@ -77,6 +81,16 @@
 
             go.appendChild(stone);
         }
+
+        function showAlert(alertTitle, alertText, alertIcon, alertConfirmButtonText) {
+            Swal.fire({
+                title: alertTitle,
+                text: alertText,
+                icon: alertIcon,
+                confirmButtonText: alertConfirmButtonText
+            });
+        }
+
     </script>
     <script>
 
@@ -274,7 +288,8 @@
 
             board.addEventListener('click', function (event) {
                 if (currentUser == 'X') {
-                    alert("순서가 아닙니다.");
+                    // alert("순서가 아닙니다.");
+                    showAlert("경고!","순서가 아닙니다.","warning","확인");
                 } else {
                     // 이미지 내에서의 좌표를 구하기 위해 offset 사용
                     const rect = board.getBoundingClientRect();
@@ -303,7 +318,8 @@
 
     <script>
         function change() {
-            alert('비공개 방으로 전환합니다.');
+            // alert('비공개 방으로 전환합니다.');
+            showAlert("안내","비공개 방으로 전환합니다.","info","확인");
 
             const form = document.createElement('form'); // form 제출용 form 객체 생성
             form.setAttribute('method', 'get');
