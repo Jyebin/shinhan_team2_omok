@@ -1,4 +1,14 @@
 window.onload = function(){
+    function showAlert(alertTitle, alertText, alertIcon, alertConfirmButtonText) {
+        Swal.fire({
+            title: alertTitle,
+            text: alertText,
+            icon: alertIcon,
+            confirmButtonText: alertConfirmButtonText
+        });
+    }
+
+
     document.querySelector(".goback").addEventListener("click" , function (){
         location.href = '/landing';
 
@@ -15,12 +25,14 @@ window.onload = function(){
         let dup = $(".hidden").val();
 
         if(dup == 'false'){
-            alert('아이디 중복확인을 하세요.')
+            showAlert("경고!","아이디 중복확인을 하세요.","warning","확인");
+            // alert('아이디 중복확인을 하세요.')
             return;
         }
 
         if(pwd1 != pwd2 ){
-            alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
+            showAlert("경고!","비밀번호가 일치하지 않습니다. 다시 입력해 주세요.","error","확인");
+            // alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
             $(".pwd1").val("");
             $(".pwd2").val("");
             return;
@@ -65,7 +77,8 @@ window.onload = function(){
         let cmd = "dupcheck";
         let result = "true";
         if(id == "" || id == null){
-            alert("아이디를 입력해주세요.");
+            // alert("아이디를 입력해주세요.");
+            showAlert("경고!","아이디를 입력해주세요.","warning","확인");
             return;
         }
 
@@ -79,9 +92,11 @@ window.onload = function(){
             success: function (result){
                 console.log(result);
                 if(result == "false"){
-                    alert("아이디가 중복됩니다 다른 아이디를 이용해 주세요.");
+                    // alert("아이디가 중복됩니다 다른 아이디를 이용해 주세요.");
+                    showAlert("경고!","아이디가 중복됩니다. 다른 아이디를 이용해 주세요.","error","확인");
                 }else {
-                    alert("아이디를 사용할수 있습니다.");
+                    showAlert("성공!","아이디를 사용할 수 있습니다.","success","확인");
+                    // alert("아이디를 사용할수 있습니다.");
                     $(".hidden").val("true");
                 }
             } ,

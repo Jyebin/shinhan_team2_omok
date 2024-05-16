@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/modal.css?after"/>
@@ -20,6 +22,15 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(function() {
+            function showAlert(alertTitle, alertText, alertIcon, alertConfirmButtonText) {
+                Swal.fire({
+                    title: alertTitle,
+                    text: alertText,
+                    icon: alertIcon,
+                    confirmButtonText: alertConfirmButtonText
+                });
+            }
+
             // 랭킹 검색 버튼
             $('#searchBtn').click(function() {
                 $.ajax({
@@ -32,7 +43,8 @@
                         $('#rankingPage').html(data);
                     },
                     error:function(data, textStatus) {
-                        alert("error");
+                        // alert("error");
+                        showAlert("경고!","에러 발생","error","확인");
                     },
                     complete: function(data, textStatus) {
                     }
@@ -56,7 +68,8 @@
             })
             $("#logout").click(function() {
                 $.get("/logout", function(data, status) {
-                    alert("로그아웃 됐습니다.");
+                    // alert("로그아웃 됐습니다.");v
+                    showAlert("","로그아웃 됐습니다.","success","확인");
                     window.location.href = "/landing";
                 });
             });

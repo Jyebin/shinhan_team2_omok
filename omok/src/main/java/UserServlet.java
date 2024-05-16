@@ -58,7 +58,7 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("url", "/landing");
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             } else {
-                request.setAttribute("msg", "회원 삭제가 실패하였습니다.");
+                request.setAttribute("msg", "비밀번호를 틀렸습니다. 회원 삭제에 실패했습니다.");
                 request.setAttribute("url", "/main");
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             }
