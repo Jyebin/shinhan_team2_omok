@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "rankingServlet", value = "/main.do")
@@ -34,10 +33,10 @@ public class RankingServlet extends HttpServlet {
 
         PrintWriter out = res.getWriter();
         for (String names : allUserList.keySet()) {
-                out.println("<div class=\"rank-panel-item\">");
-                out.println("<div class=\"rank-panel-item-rank\">" + allUserList.get(names) + "</div>");
-                out.println("<div class=\"rank-panel-item-id\">" + names + "</div>");
-                out.println("</div>");
+            out.println("<div class=\"rank-panel-item\">");
+            out.println("<div class=\"rank-panel-item-rank\">" + allUserList.get(names) + "</div>");
+            out.println("<div class=\"rank-panel-item-id\">" + names + "</div>");
+            out.println("</div>");
         }
     }
 }

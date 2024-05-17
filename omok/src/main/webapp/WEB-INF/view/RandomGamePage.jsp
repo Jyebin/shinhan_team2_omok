@@ -90,16 +90,11 @@
                 confirmButtonText: alertConfirmButtonText
             });
         }
-
     </script>
     <script>
-
         let update_time3;
-
         $(function () {
-
             // Cache some selectors
-
             var clock = $('#clock'),
                 alarm = clock.find('.alarm'),
                 ampm = clock.find('.ampm');
@@ -117,33 +112,24 @@
 
             // Generate the digits with the needed markup,
             // and add them to the clock
-
             var digit_holder = clock.find('.digits');
 
             $.each(positions, function () {
-
                 if (this == ':') {
                     digit_holder.append('<div class="dots">');
-                }
-                else {
-
+                } else {
                     var pos = $('<div>');
-
                     for (var i = 1; i < 8; i++) {
                         pos.append('<span class="d' + i + '">');
                     }
-
                     // Set the digits as key:value pairs in the digits object
                     digits[this] = pos;
-
                     // Add the digit elements to the page
                     digit_holder.append(pos);
                 }
-
             });
 
             // Add the weekday names
-
             var weekday_names = 'MON TUE WED THU FRI SAT SUN'.split(' '),
                 weekday_holder = clock.find('.weekdays');
 
@@ -156,8 +142,8 @@
 
             // Run a timer every second and update the clock
             let second = 0;
-            function update_time2() {
 
+            function update_time2() {
                 // Use moment.js to output the current time as a string
                 // hh is for the hours in 12-hour format,
                 // mm - minutes, ss-seconds (all with leading zeroes),
@@ -176,7 +162,6 @@
                 // The library returns Sunday as the first day of the week.
                 // Stupid, I know. Lets shift all the days one position down,
                 // and make Sunday last
-
                 var dow = now[6];
                 dow--;
 
@@ -203,44 +188,15 @@
             $('a.button').click(function () {
                 clock.toggleClass('light dark');
             });
-
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        window.onload = function (){
-            document.querySelector(".lose-modal-exit").addEventListener("click" , function (){
+        window.onload = function () {
+            document.querySelector(".lose-modal-exit").addEventListener("click", function () {
                 window.location.replace("/main");
             });
-            document.querySelector(".win-modal-exit").addEventListener("click" , function (){
+            document.querySelector(".win-modal-exit").addEventListener("click", function () {
                 window.location.replace("/main");
             });
-
-
-
-
-
 
             webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
             $(".opponent2").hide();
@@ -285,12 +241,10 @@
                         const xhr = new XMLHttpRequest(); //XMLHttpRequest 객체 생성
                         xhr.open("GET", "/winLose"); //HTTP Method, URL 정의
                         xhr.setRequestHeader("content-type", "application/json; charset=UTF-8"); //헤더값 중 content-type 정의
-
                         xhr.send()
-
                         document.querySelector(".win-modal").style.display = 'block';
                     } else {
-                        document.querySelector(".lose-modal").style.display ='block';
+                        document.querySelector(".lose-modal").style.display = 'block';
                     }
                     webSocket.close();
                 }
@@ -306,12 +260,10 @@
         // 바둑알 놓기
         document.addEventListener('DOMContentLoaded', function () {
             const board = document.getElementById('checkerboard-img');
-            const go = document.getElementById('go');
 
             board.addEventListener('click', function (event) {
                 if (currentUser == 'X') {
-                    // alert("순서가 아닙니다.");
-                    showAlert("경고!","순서가 아닙니다.","warning","확인");
+                    showAlert("경고!", "순서가 아닙니다.", "warning", "확인");
                 } else {
                     // 이미지 내에서의 좌표를 구하기 위해 offset 사용
                     const rect = board.getBoundingClientRect();
@@ -340,8 +292,7 @@
 
     <script>
         function change() {
-            // alert('비공개 방으로 전환합니다.');
-            showAlert("안내","비공개 방으로 전환합니다.","info","확인");
+            showAlert("안내", "비공개 방으로 전환합니다.", "info", "확인");
 
             const form = document.createElement('form'); // form 제출용 form 객체 생성
             form.setAttribute('method', 'get');
@@ -365,10 +316,10 @@
     <div class="win-modal-container">
         <h2 class="win-modal-title">YOU WIN!!!</h2>
         <input class="win-modal-exit" type="button" value="나가기">
-        <img class="win-modal-img1" src="/img/firework.png" width="200" height="200" />
-        <img class="win-modal-img2" src="/img/firework.png" width="200" height="200" />
-        <img class="win-modal-img3" src="/img/firework.png" width="200" height="200" />
-        <img class="win-modal-img4" src="/img/firework.png" width="200" height="200" />
+        <img class="win-modal-img1" src="/img/firework.png" width="200" height="200"/>
+        <img class="win-modal-img2" src="/img/firework.png" width="200" height="200"/>
+        <img class="win-modal-img3" src="/img/firework.png" width="200" height="200"/>
+        <img class="win-modal-img4" src="/img/firework.png" width="200" height="200"/>
     </div>
 </div>
 <div class="lose-modal" style='z-index: 10; font-family: "Jua", sans-serif'>

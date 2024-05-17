@@ -4,8 +4,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.security.SecureRandom;
-
 
 @WebServlet(name = "CustomGameServlet", value = "/custom-game")
 public class CustomGameServlet extends HttpServlet {
@@ -27,6 +25,5 @@ public class CustomGameServlet extends HttpServlet {
     }
 
     protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

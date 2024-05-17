@@ -22,5 +22,4 @@ public class RandomGameServlet extends HttpServlet {
         res.setContentType("text/html; charset=utf-8");
         req.getRequestDispatcher("/WEB-INF/view/RandomGamePage.jsp").forward(req, res);
     }
-
 }

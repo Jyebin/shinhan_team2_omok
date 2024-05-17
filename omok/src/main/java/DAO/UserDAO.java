@@ -1,7 +1,5 @@
 package DAO;
 
-import VO.UserVO;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -45,9 +43,18 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try { resultSet.close(); } catch (Exception e) { }
-            try { preparedStatement.close(); } catch (Exception e) { }
-            try { con.close(); } catch (Exception e) { }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {
+            }
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return result;
     }
@@ -73,9 +80,18 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try { resultSet.close(); } catch (Exception e) { }
-            try { preparedStatement.close(); } catch (Exception e) { }
-            try { con.close(); } catch (Exception e) { }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {
+            }
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return result;
     }
@@ -103,9 +119,18 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try { resultSet.close(); } catch (Exception e) { }
-            try { preparedStatement.close(); } catch (Exception e) { }
-            try { con.close(); } catch (Exception e) { }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {
+            }
+            try {
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return result;
     }

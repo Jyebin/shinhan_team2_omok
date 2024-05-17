@@ -2,13 +2,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import DAO.MainPageDAO;
-
-import VO.UserVO;
 
 @WebServlet(name = "mainServlet", value = "/main")
 public class MainPageServlet extends HttpServlet {
@@ -47,7 +44,6 @@ public class MainPageServlet extends HttpServlet {
         req.setAttribute("firstMember", firstMember);
         req.setAttribute("secondMember", secondMember);
         req.setAttribute("thirdMember", thirdMember);
-
 
         // 유저 검색
         req.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(req, res);
