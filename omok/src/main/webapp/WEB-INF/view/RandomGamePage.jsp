@@ -198,7 +198,7 @@
                 window.location.replace("/main");
             });
 
-            webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
+            webSocket = new WebSocket("ws://192.168.0.166:9090/" + room + "/" + type);
             $(".opponent2").hide();
 
             // 캐릭터 머리 위 바둑알 색 설정
