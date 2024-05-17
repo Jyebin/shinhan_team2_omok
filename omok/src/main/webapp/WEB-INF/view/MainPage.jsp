@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/font.css?after"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
             function showAlert(alertTitle, alertText, alertIcon, alertConfirmButtonText) {
                 Swal.fire({
                     title: alertTitle,
@@ -32,50 +32,47 @@
             }
 
             // 랭킹 검색 버튼
-            $('#searchBtn').click(function() {
+            $('#searchBtn').click(function () {
                 $.ajax({
                     type: "get",
                     dataType: "html",
                     async: "false",
                     url: "/main.do",
-                    data: {name:$('#searchName').val()},
-                    success:function(data, textStatus) {
+                    data: {name: $('#searchName').val()},
+                    success: function (data, textStatus) {
                         $('#rankingPage').html(data);
                     },
-                    error:function(data, textStatus) {
-                        // alert("error");
-                        showAlert("경고!","에러 발생","error","확인");
+                    error: function (data, textStatus) {
+                        showAlert("경고!", "에러 발생", "error", "확인");
                     },
-                    complete: function(data, textStatus) {
+                    complete: function (data, textStatus) {
                     }
                 }) // end ajax
             }) // end click
-            $('#setBtn').click(function() {
+            $('#setBtn').click(function () {
                 $('.setting-bg').show();
                 $('#set').show();
             })
-            $('#exitBtn').click(function() {
+            $('#exitBtn').click(function () {
                 $('.setting-bg').hide();
                 $('#set').hide();
             })
-            $('#makeRoom').click(function() {
+            $('#makeRoom').click(function () {
                 $('.setting-bg').show();
                 $('#select').show();
             })
-            $('#selectExitBtn').click(function() {
+            $('#selectExitBtn').click(function () {
                 $('.setting-bg').hide();
                 $('#select').hide();
             })
-            $("#logout").click(function() {
-                $.get("/logout", function(data, status) {
-                    // alert("로그아웃 됐습니다.");v
-                    showAlert("","로그아웃 됐습니다.","success","확인");
+            $("#logout").click(function () {
+                $.get("/logout", function (data, status) {
+                    showAlert("", "로그아웃 됐습니다.", "success", "확인");
                     window.location.href = "/landing";
                 });
             });
         }) // end function
     </script>
-
 </head>
 <body class="body">
 <main class="main">
@@ -112,7 +109,8 @@
                             <c:forEach var="mem" items="${userList}" varStatus="status">
                                 <div class="rank-panel-item">
                                     <div class="rank-panel-item-rank">${mem.value}</div>
-                                    <div class="rank-panel-item-id">${mem.key}</div></div>
+                                    <div class="rank-panel-item-id">${mem.key}</div>
+                                </div>
                             </c:forEach>
                         </div>
                     </div>
@@ -138,7 +136,6 @@
                 </form>
             </section>
         </section>
-
     </section>
 
     <div class="modal-bg"></div>
@@ -149,7 +146,7 @@
         <input id="logout" type="button" value="로그아웃">
         <form class="formClass" action="${pageContext.request.contextPath}/register" method="post">
             <input name="pwd" id="pwd" type="password" placeholder="pwd 입력">
-            <input name="cmd" type="hidden" value="delmember" >
+            <input name="cmd" type="hidden" value="delmember">
             <input id="withdraw" type="submit" value="회원탈퇴">
         </form>
     </div>

@@ -20,7 +20,6 @@
             }
         });
     }
-
     // showAlert 함수 호출 시 URL을 매개변수로 전달
     showAlert('', '${msg}', 'info', '확인', '${url}');
 </script>

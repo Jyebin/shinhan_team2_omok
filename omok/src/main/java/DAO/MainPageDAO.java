@@ -2,12 +2,9 @@ package DAO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.*;
-
-import VO.UserVO;
 
 public class MainPageDAO {
     private Connection con = null;

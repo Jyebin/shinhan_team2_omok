@@ -69,7 +69,7 @@ public class GoBoard {
             isContinued = true;
             cnt = 0;
             if (x < 0 || y < 0 || x >= size || y >= size) continue;
-            while(isContinued) {
+            while (isContinued) {
                 if (board[x][y].equals(board[i][j])) cnt += 1;
                 else isContinued = false;
                 x += dx[d];
@@ -80,8 +80,7 @@ public class GoBoard {
                 if (board[i][j].equals("X")) {
                     winner = "white";
                     loser = "black";
-                }
-                else if (board[i][j].equals("O"))  {
+                } else if (board[i][j].equals("O")) {
                     winner = "black";
                     loser = "white";
                 }

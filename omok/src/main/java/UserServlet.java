@@ -41,7 +41,6 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("url", "/register");
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             }
-
         // 회원 삭제
         } else if ("delmember".equals(cmd)) {
             UserDAO dao = new UserDAO();
@@ -62,7 +61,6 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("url", "/main");
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);
             }
-
         // 아이디 중복 체크
         } else if ("dupcheck".equals(cmd)) {
             UserDAO dao = new UserDAO();

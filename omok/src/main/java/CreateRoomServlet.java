@@ -42,7 +42,7 @@ public class CreateRoomServlet extends HttpServlet {
         session.setAttribute("room", room);
         session.setAttribute("type", type);
 
-        redirectURL += "room="+room+"&type="+type;
+        redirectURL += "room=" + room + "&type=" + type;
         res.sendRedirect(redirectURL);
     }
 

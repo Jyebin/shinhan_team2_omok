@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "enterRoomServlet", value = "/enterRoom")
 public class EnterRoomServlet extends HttpServlet {
@@ -31,12 +30,10 @@ public class EnterRoomServlet extends HttpServlet {
         }
 
         HttpSession session = req.getSession();
-
         if ("0".equals(roomId)) {
             // 방 없을 경우 alert 띄움
             req.setAttribute("msg", "참여할 수 있는 방이 없습니다.");
             req.setAttribute("url", "/main");
-
             req.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(req, res);
         } else {
             session.setAttribute("type", "enter");

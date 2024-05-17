@@ -41,13 +41,13 @@ public class WebSocket {
     public void handleMessage(Session recieveSession, String message, @PathParam("type") String type, @PathParam("room") String room) throws IOException {
         JSONObject jsonObject = new JSONObject(message);
         JSONObject data = new JSONObject();
-        if(jsonObject.get("event").equals("chat")){
-            for(int i = 0; i < gameRoom.get(room).size(); ++i) {
+        if (jsonObject.get("event").equals("chat")) {
+            for (int i = 0; i < gameRoom.get(room).size(); ++i) {
                 Session waitingSession = gameRoom.get(room).get(i);
                 data.put("room", room);
                 data.put("type", type);
                 data.put("message", jsonObject.getString("message"));
-                data.put("event" , "chat");
+                data.put("event", "chat");
                 waitingSession.getBasicRemote().sendText(data.toString());
             } // gameRoom.get(room)이 비어있을 수 없기 때문에, 예외 삭제
         } // chat 이벤트 끝
@@ -64,8 +64,7 @@ public class WebSocket {
             }
             Session waitingSession = gameRoom.get(room).get(sessionIndex);
             waitingSession.getAsyncRemote().sendText(data.toString());
-        }
-        else if ("omok".equals(jsonObject.getString("event"))) {
+        } else if ("omok".equals(jsonObject.getString("event"))) {
             int x = jsonObject.getInt("x");
             int y = jsonObject.getInt("y");
             GoBoard board = gameBoard.get(room);
