@@ -8,7 +8,7 @@
 
 /*login-item1*/
 .signup-item1{
-    
+
     width: 500px;
     height: 200px;
     background : url("/img/cutted_background.png");
@@ -23,6 +23,12 @@
     width: 500px;
     height: 300px;
 }
+.signup-item2 input{
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
 
 .signup-item2-container{
     margin-top: 40px;
@@ -67,7 +73,24 @@
     flex-direction: row;
 }
 
+.signup-item3 input{
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
 .signup-item3 input[type='button']{
+    margin : 40px;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #B75D35;
+    border: none;
+    font-size: 30px;
+    color: white;
+}
+
+.signup-item3 input[type='submit']{
     margin : 40px;
     width: 200px;
     height: 50px;

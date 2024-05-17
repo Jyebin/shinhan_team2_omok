@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오목눈이</title>
-    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/signup.css"/>
 
@@ -24,10 +24,7 @@
             <section class="signup-item2">
                 <div class="signup-item2-container">
                     <div class="signup-item2-div">ID</div>
-                    <input class="signup-item2-input id" type="text"> <input class="signup-item2-duple" type="button"
-                                                                             value="중복확인"> <input class="hidden"
-                                                                                                  type="hidden"
-                                                                                                  value="false"/>
+                    <input class="signup-item2-input id" type="text"> <input class="signup-item2-duple" type="button" value="중복확인"> <input class="hidden" type="hidden" value="false"/>
                 </div>
                 <div class="signup-item2-container">
                     <div class="signup-item2-div">PW</div>
@@ -39,7 +36,8 @@
                 </div>
             </section>
             <section class="signup-item3">
-                <input class="regist" type="button" value="회원가입"> <input class="goback" type="button" value="돌아가기">
+                <input class="regist" type="button" value="회원가입">
+                <input class="goback" type="button" value="돌아가기">
             </section>
         </section>
     </section>
