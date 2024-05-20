@@ -100,7 +100,7 @@ Web-based concave game development project
 
 | 2-1. 게임방(공개) 생성 및 참여                                                                                                          | 2-2. 게임방(비공개) 생성 및 참여                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| ![flowchart2](https://file.miricanvas.com/user_image/2024/05/16/19/50/k2gyfoz9nllt7v3h/mermaid-diagram-2024-05-16-195829.png) | ![flowchart3](https://file.miricanvas.com/user_image/2024/05/16/21/00/kktben38v2nywdmo/mermaid-diagram-2024-05-16-210831.png) |
+| ![flowchart2](https://file.miricanvas.com/user_image/2024/05/16/21/00/ko9xqrwet9eu87y6/mermaid-diagram-2024-05-16-210810.png) | ![flowchart3](https://file.miricanvas.com/user_image/2024/05/16/21/00/kktben38v2nywdmo/mermaid-diagram-2024-05-16-210831.png) |
 
 | 3. 게임 실행 및 종료                            |
 |-----------------------------------------------------------------------|
