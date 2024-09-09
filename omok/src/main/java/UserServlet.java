@@ -14,6 +14,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.getRequestDispatcher("/WEB-INF/view/RegisterPage.jsp").forward(request, response);
     }
 
@@ -46,10 +47,10 @@ public class UserServlet extends HttpServlet {
             UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
             String userName = (String) session.getAttribute("name");
-            session.invalidate();
 
             boolean result = dao.delMember(userName, pwd);
             if (result) {
+                session.invalidate();
                 request.setAttribute("msg", "회원이 삭제되었습니다.");
                 request.setAttribute("url", "/landing");
                 request.getRequestDispatcher("/WEB-INF/view/include/alert.jsp").forward(request, response);

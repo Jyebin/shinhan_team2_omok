@@ -200,7 +200,7 @@
                 window.location.replace("/main");
             });
 
-            webSocket = new WebSocket("ws://localhost:9090/" + room + "/" + type);
+            webSocket = new WebSocket("ws://192.168.0.166:9090/" + room + "/" + type);
             $(".opponent2").hide();
 
             // 캐릭터 머리 위 바둑알 색 설정
@@ -324,7 +324,7 @@
 </head>
 
 <body class="body">
-<div class="win-modal">
+<div class="win-modal" style='z-index: 10; font-family: "Jua", sans-serif'>
     <div class="win-modal-container">
         <h2 class="win-modal-title">YOU WIN!!!</h2>
         <input class="win-modal-exit" type="button" value="나가기">
@@ -334,7 +334,7 @@
         <img class="win-modal-img4" src="/img/firework.png" width="200" height="200"/>
     </div>
 </div>
-<div class="lose-modal">
+<div class="lose-modal" style='z-index: 10; font-family: "Jua", sans-serif'>
     <div class="lose-modal-container">
         <h2 class="lose-modal-title">YOU LOSE...</h2>
         <input class="lose-modal-exit" type="button" value="나가기">
