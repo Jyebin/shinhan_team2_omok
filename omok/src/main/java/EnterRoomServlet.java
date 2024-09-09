@@ -39,8 +39,6 @@ public class EnterRoomServlet extends HttpServlet {
             session.setAttribute("type", "enter");
             session.setAttribute("room", roomId);
 
-            System.out.println("enter room 서블릿 실행");
-            System.out.println("gameType:" + gameType + " roomId:" + roomId);
             String redirectURL = "/" + gameType + "-game?room=" + roomId + "&type=enter";
 
             res.sendRedirect(redirectURL);

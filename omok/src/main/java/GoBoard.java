@@ -76,7 +76,6 @@ public class GoBoard {
                 y += dy[d];
             }
             if (cnt >= 4) {
-                System.out.println(cnt);
                 if (board[i][j].equals("X")) {
                     winner = "white";
                     loser = "black";

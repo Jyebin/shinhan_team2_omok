@@ -16,7 +16,6 @@ public class CustomGameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String roomId = request.getParameter("roomId"); //roomCode값을 받아옴
         if (roomId != null) {
-            System.out.println("roomCode:" + roomId);
             GameDAO gameDAO = new GameDAO();
             gameDAO.changeIsCustom(Integer.parseInt(roomId));
         } else {

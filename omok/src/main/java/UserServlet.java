@@ -48,9 +48,6 @@ public class UserServlet extends HttpServlet {
             String userName = (String) session.getAttribute("name");
             session.invalidate();
 
-            System.out.println("cmd: " + cmd);
-            System.out.println("id: " + id);
-            System.out.println("pwd: " + pwd);
             boolean result = dao.delMember(userName, pwd);
             if (result) {
                 request.setAttribute("msg", "회원이 삭제되었습니다.");
@@ -65,7 +62,6 @@ public class UserServlet extends HttpServlet {
         } else if ("dupcheck".equals(cmd)) {
             UserDAO dao = new UserDAO();
             boolean result = dao.dupCheck(id);
-            System.out.println("result: " + result);
             response.setContentType("application/x-json; charset=utf-8");
             PrintWriter out = response.getWriter();
             if (!result) {

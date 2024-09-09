@@ -28,7 +28,6 @@ public class LandingPageServlet extends HttpServlet {
         LandingDAO dao = new LandingDAO();
 
         UserVO vo = dao.loginCheck(id, pwd);
-        System.out.println(vo);
         if (vo == null) {
             request.setAttribute("msg", "회원정보가 일치하지 않습니다.");
             request.setAttribute("url", "/landing");

@@ -17,9 +17,7 @@ public class LandingDAO {
         try {
             Context init = new InitialContext();
             dataSource = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
-            System.out.println("연결 성공");
         } catch (Exception e) {
-            System.out.println("연결 실패");
             e.printStackTrace();
         }
     }
@@ -52,10 +50,8 @@ public class LandingDAO {
                 vo.setUserWinCnt(userWinCnt);
                 vo.setUserGameCnt(userGameCnt);
             }
-            System.out.println("회원 조회 성공");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("회원 조회 실패");
         } finally {
             try {
                 resultSet.close();

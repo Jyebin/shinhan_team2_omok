@@ -14,9 +14,7 @@ public class MainPageDAO {
         try {
             Context init = new InitialContext();
             dataSource = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
-            System.out.println("Success");
         } catch (Exception e) {
-            System.out.println("Fail");
             e.printStackTrace();
         }
     }

@@ -15,9 +15,7 @@ public class UserDAO {
         try {
             Context init = new InitialContext();
             dataSource = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
-            System.out.println("연결 성공");
         } catch (Exception e) {
-            System.out.println("연결 실패");
             e.printStackTrace();
         }
     }
@@ -110,7 +108,6 @@ public class UserDAO {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             int row = resultSet.getInt("cnt");
-            System.out.println("row: " + row);
             if (row > 0) {
                 result = false;
             } else {

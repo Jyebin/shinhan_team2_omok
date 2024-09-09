@@ -22,9 +22,7 @@ public class RandomGameDAO {
         try {
             Context init = new InitialContext();
             dataSource = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
-            System.out.println("연결 성공");
         } catch (Exception e) {
-            System.out.println("연결 실패");
             e.printStackTrace();
         }
     }
@@ -44,15 +42,12 @@ public class RandomGameDAO {
 
             if (resultSet.next()) {
                 roomNum = resultSet.getInt("game_id");
-                System.out.println("공개방 조회 성공");
                 changeCanEnter(roomNum);
-                System.out.println("해당 방 더 이상 입장 불가능");
             } else {
                 System.out.println("공개방 없음. 랜덤 매치 불가능");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("공개방 DB 조회 실패");
         } finally {
             try {
                 resultSet.close();
@@ -81,15 +76,12 @@ public class RandomGameDAO {
 
             if (resultSet.next()) {
                 roomNum = resultSet.getInt("game_id");
-                System.out.println("코드 일치 방 조회 성공");
                 changeCanEnter(roomNum);
-                System.out.println("해당 방 더 이상 입장 불가능");
             } else {
                 System.out.println("코드 일치 방 없음. 랜덤 매치 불가능");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("비공개방 DB 조회 실패");
         } finally {
             try {
                 resultSet.close();
@@ -116,7 +108,6 @@ public class RandomGameDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("DB 업데이트 실패");
         } finally {
             try {
                 pstmt.close();

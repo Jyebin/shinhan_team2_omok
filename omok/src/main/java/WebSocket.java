@@ -68,13 +68,12 @@ public class WebSocket {
             int x = jsonObject.getInt("x");
             int y = jsonObject.getInt("y");
             GoBoard board = gameBoard.get(room);
-            processOmok(x, y, board, recieveSession, type);
+            processOmok(x, y, board, recieveSession, type, room);
         }
     }
 
-    private void processOmok(int x, int y, GoBoard board, Session session, String type) {
-        broadCastOmokMove(x, y, session); // 좌표 전달
-        System.out.println(x + " " + y);
+    private void processOmok(int x, int y, GoBoard board, Session session, String type, String room) {
+        broadCastOmokMove(x, y, session, room); // 좌표 전달
         if (board.check(x, y, session)) {
             // 승패가 갈렸는지 여부 체크
             // 갈렸으면 -> winner에게 win 담긴 msg 전달, loser에게 lose 담긴 msg 전달
@@ -89,35 +88,32 @@ public class WebSocket {
         }
     }
 
-    private void broadCastOmokMove(int x, int y, Session session) {
-        // 현재 방에 있는 모든 클라이언트에게 오목 돌 놓기 이벤트 메시지 전송
-        for (List<Session> sessions : gameRoom.values()) {
-            for (Session s : sessions) {
-                if (!s.equals(session)) { // 다른 클라이언트에게 전송
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("event", "omok");
-                    jsonObject.put("x", x);
-                    jsonObject.put("y", y);
-                    s.getAsyncRemote().sendText(jsonObject.toString());
-                }
+    private void broadCastOmokMove(int x, int y, Session session, String room) {
+        // 해당 room의 클라이언트에게만 메시지 전송
+        List<Session> sessions = gameRoom.get(room); // 현재 방(room)의 세션 목록을 가져옴
+        for (Session s : sessions) {
+            if (!s.equals(session)) { // 자기 자신을 제외한 다른 클라이언트에게 전송
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("event", "omok");
+                jsonObject.put("x", x);
+                jsonObject.put("y", y);
+                s.getAsyncRemote().sendText(jsonObject.toString());
             }
         }
     }
 
+
     // WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
     @OnClose
     public void handleClose(@PathParam("room") String room, Session session) throws IOException {
-        System.out.println("게임 나가기! 소켓 연결 종료");
         gameBoard.remove(room);
         gameRoom.remove(room);
         session.close();
-        System.out.println("여기도되나");
     }
 
     // WebSocket과 브라우저 간에 통신 에러가 발생하면 요청되는 함수.
     @OnError
     public void handleError(Throwable t) {
-        System.out.println("HandleError 호출");
         t.printStackTrace();
     }
 }

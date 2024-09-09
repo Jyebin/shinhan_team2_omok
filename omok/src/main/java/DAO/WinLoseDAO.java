@@ -15,9 +15,7 @@ public class WinLoseDAO {
         try {
             Context init = new InitialContext();
             dataSource = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
-            System.out.println("연결 성공");
         } catch (Exception e) {
-            System.out.println("연결 실패");
             e.printStackTrace();
         }
     }

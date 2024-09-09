@@ -23,7 +23,6 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null) {
-            System.out.println("logout");
             session.invalidate();
         }
         response.sendRedirect("/landing");

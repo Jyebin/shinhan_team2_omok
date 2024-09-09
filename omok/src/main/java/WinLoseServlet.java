@@ -14,7 +14,6 @@ public class WinLoseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String loginUser = (String) session.getAttribute("name");
-        System.out.println("로그인한 이긴 유저 : " + loginUser);
         WinLoseDAO winLoseDAO = new WinLoseDAO();
         winLoseDAO.updateWinCnt(loginUser);
         doHandle(request, response);
